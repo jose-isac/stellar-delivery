@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Rápido e Delicioso! 😋</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+  
+  <div class="container">
+    <h1 class="text-center">Rápido e Delicioso! 😋</h1>
+    <div class="row mb-4">
+      <div class="col-md-6 offset-md-3">
+        <form class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="O que você deseja?" aria-label="Pesquisar">
+          <button class="btn btn-outline-primary my-2 my-sm-2" type="submit">Pesquisar</button>
+        </form>
+      </div>
+      <div class="col-md-2 text-right">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#janelaLogin">Login</button>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-4 my-3">
+        <div class="card" id="1">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 1">
+          <div class="card-body">
+            <h5 class="card-title">Produto 1</h5>
+            <p class="card-text">Descrição do Produto 1.</p>
+            <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 my-3">
+        <div class="card" id="2">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 2">
+          <div class="card-body">
+            <h5 class="card-title">Produto 2</h5>
+            <p class="card-text">Descrição do Produto 2.</p>
+            <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 my-4">
+        <div class="card" id="3">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 3">
+          <div class="card-body">
+            <h5 class="card-title">Produto 3</h5>
+            <p class="card-text">Descrição do Produto 3.</p>
+            <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-4 my-4">
+        <div class="card" id="4">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 4">
+          <div class="card-body">
+            <h5 class="card-title">Produto 4</h5>
+            <p class="card-text">Descrição do Produto 4.</p>
+            <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 my-4">
+        <div class="card" id="5">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 5">
+          <div class="card-body">
+            <h5 class="card-title">Produto 5</h5>
+            <p class="card-text">Descrição do Produto 5.</p>
+            <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 my-4">
+        <div class="card" id="6">
+          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 6">
+          <div class="card-body">
+            <h5 class="card-title">Produto 6</h5>
+            <p class="card-text">Descrição do Produto 6.</p>
+            <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal Login-->
+  
+  <div class="modal fade" id="janelaLogin" tabindex="-1" aria-labelledby="titulo-login" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="titulo-login">Login</h3>
+          <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">X</button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            
+            <form class="form" action="">
+              <label class="form-label" for="usuario_email">E-Mail</label>
+              <input class="form-control" type="email" placeholder="Digite seu e-mail" id="usuario_email">
+              
+              <label class="form-label" for="usuario_senha">Senha</label>
+              <input class="form-control" type="password" required id="usuario_senha" placeholder="Digite sua senha">
+              <hr>
+              <p>
+                <a href="#" id="aRegistro">Ainda não tem uma conta?</a>
+              </p>
+              <p>
+                 <a href="" id="a_Ml_Administrador">Sou administrador</a>
+              </p>
+              
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-success" value="Login" id="btnLogin">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Fim do modal Login -->
+  
+  <!-- Modal Produto-->
+  
+  <div class="modal fade" id="modalProduto" tabindex="-1" aria-labelledby="produto_titulo" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="produto_titulo"></h3>
+          <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">X</button>
+        </div>
+        <div class="modal-body" id="modal-corpo">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="thumbnail">
+                  <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 6">
+                </div>
+              </div>
+              <div class="col-md-8">
+                <p>Este alimento é assim assim assado.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" id="btn_comprar">Comprar</button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- Fim do modal produto -->
+  
+  <!-- Inicio Modal Registro -->
+  
+  <div class="modal fade" id="janelaRegistro" tabindex="-1" aria-labelledby="titulo-registro" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="titulo-registro">Registro</h3>
+          <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">X</button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            
+            <form class="form" action="">
+              <label class="form-label" for="usuario_nome_completo_reg">Nome completo</label>
+              <input class="form-control" type="text" placeholder="Seu nome completo" id="usuario_nome_completo_reg">
+              
+              <label class="form-label" for="usuario_cpf">CPF</label>
+              <input class="form-control" type="text" required id="usuario_cpf_reg" placeholder="Digite seu CPF">
+              
+              <label class="form-label" for="usuario_email_reg">E-Mail</label>
+              <input class="form-control" type="email" required id="usuario_email_reg" placeholder="Digite seu email">
+              
+              <label class="form-label" for="usuario_senha_reg">Senha</label>
+              <input class="form-control" type="text" required id="usuario_senha_reg" placeholder="Digite sua senha">
+              <input class="form-control mt-2" type="text" required id="usuario_senha_confirm_reg" placeholder="Repita sua senha">
+              
+              <label class="form-label" for="usuario_telefone_reg">Telefone</label>
+              <input type="text" class="form-control" required id="usuario_telefone_reg" placeholder="Digite seu telefone">
+              
+              <label for="usuario_cep_reg">CEP</label>
+              <input type="text" class="form-control" required id="usuario_cep_reg" placeholder="Digite seu CEP">
+              
+              <label for="usuario_estado" class="form-label">Estado</label>
+              <input type="text" class="form-control" id="user_estado_reg" list="user_estado_data" required placeholder="Digite seu estado">
+              <datalist class="form-select" id="user_estado_data">
+                <option value="teste">Fictício</option>
+              </datalist>
+              
+              <label for="usuario_cidade_reg"class="form-label">Cidade</label>
+              <input type="text" id="usuario_cidade_reg" class="form-control" list="usuario_cidade_data" placeholder="Digite o nome da cidade">
+              <datalist id="usuario_cidade_data">
+                <option value="teste">teste</option>
+              </datalist> 
+              
+              <label for="usuario_bairro_reg">Bairro</label>
+              <hr>
+              <p>
+                <a href="#" id="aLogin">Já tem uma conta?</a>
+              </p>
+              <p>
+                 <a href="#" id="a_Mrg_Administrador">Sou administrador</a>
+              </p>
+              
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-success" value="Criar conta" id="btnRegistro">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="js/bootstrap.bundle.js"></script>
+  <script src="js/jquery3.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    $(document).ready(function() {
+      // Abrir o modal de produto ao clicar em algum card da tela principal
+      $(".card").click(function(){
+        let id_produto = $(this).attr("id")
+        
+        $("#produto_titulo").text("Produto " + id_produto)
+        
+        $("#modalProduto").modal('show');
+      })
+      
+      // Ao clicar no botão de comprar, exibir sweet alert dizendo que deu certo
+      $('#btn_comprar').click(function() {
+        Swal.fire({
+          title: "Aviso",
+          html: "Transação em andamento...",
+          timer: 2000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            
+            timerInterval = setInterval(() => {
+              b.textContent = Swal.getTimerLeft()
+              
+            }, 100)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          if (result.dismiss === Swal.DismissReason.timer){
+            Swal.fire({
+              title: 'Sucesso!',
+              icon: 'success',
+              text: 'Compra realizada com sucesso!'
+            })
+            
+            $('#modalProduto').modal('hide')
+          }
+        })
+      })
+      
+      // Função para mostrar modal de registro
+      $('#aRegistro').click(function() {
+        $('#janelaLogin').modal('hide')
+        $('#janelaRegistro').modal('show')
+      })
+      
+      
+    })
+  </script>
+  </body>
+  </html>
