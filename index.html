@@ -3,16 +3,16 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Rápido e Delicioso! 😋</title>
+  <title>Stellar Delivery 🌠🍰</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body>
   
   <div class="container">
-    <h1 class="text-center">Rápido e Delicioso! 😋</h1>
+    <h1 class="text-center">Stellar Delivery 🌠😶</h1>
     <div class="row mb-4">
-      <div class="col-md-6 offset-md-3">
+      <div class="col-md-6 offset-md-2">
         <form class="form-inline">
           <input class="form-control mr-sm-2" type="search" placeholder="O que você deseja?" aria-label="Pesquisar">
           <button class="btn btn-outline-primary my-2 my-sm-2" type="submit">Pesquisar</button>
@@ -20,6 +20,9 @@
       </div>
       <div class="col-md-2 text-right">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#janelaLogin">Login</button>
+      </div>
+      <div class="col-md-2 text-right">
+        <button type="" class="btn btn-info" id="btnPerfil">Perfil</button>
       </div>
     </div>
     
@@ -160,6 +163,44 @@
   
   <!-- Fim do modal produto -->
   
+    <!-- Modal Perfil-->
+  
+  <div class="modal fade" id="modalPerfil" tabindex="-1" aria-labelledby="perfil_titulo" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="perfil_titulo"></h3>
+          <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">X</button>
+        </div>
+        <div class="modal-body" id="modal-corpo">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="thumbnail">
+                  <img src="https://via.place holder.com/150" class="card-img-top" alt="Produto 6">
+                </div>
+              </div>
+              <div class="col-md-8">
+                <label class="form-label" for="usuario_perfil_nome">Nome</label>
+                <input class="form-control" type="text" id="usuario_perfil_nome">
+                
+                <label class="form-label" for="usuario_perfil_cpf">CPF</label>
+                <input type="text" class="form-control">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary" id="btn_comprar">Comprar</button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- Fim do modal produto -->
+  
   <!-- Inicio Modal Registro -->
   
   <div class="modal fade" id="janelaRegistro" tabindex="-1" aria-labelledby="titulo-registro" aria-hidden="true">
@@ -204,7 +245,22 @@
                 <option value="teste">teste</option>
               </datalist> 
               
-              <label for="usuario_bairro_reg">Bairro</label>
+              
+              <label class="form-label" for="usuario_bairro_reg">Bairro</label>
+              <input type="text" id="usuario_bairro_reg" class="form-control" required placeholder="Digite o nome do seu bairro" list="usuario_bairro_data">
+              <datalist id="usuario_bairro_data">
+                <option value="teste">teste</option>
+              </datalist>
+              
+              <label class="form-label"  for="usuario_endereco_reg">Endereço</label>
+              <input type="text" class="form-control" required placeholder="Digite seu endereço" id="usuario_endereco_reg">
+              
+              <label class="form-label" for="usuario_numero_reg">Número da residência</label>
+              <input type="tel" class="form-control" id="usuario_numero_reg" required placeholder="Digite o número de sua residência">
+              
+              <label class="form-label" for="usuario_complemento_reg">Complemento</label>
+              <input type="text" class="form-control" id="usuario_complemento_reg" required placeholder="Digite um complemento">
+              
               <hr>
               <p>
                 <a href="#" id="aLogin">Já tem uma conta?</a>
@@ -273,6 +329,10 @@
       $('#aRegistro').click(function() {
         $('#janelaLogin').modal('hide')
         $('#janelaRegistro').modal('show')
+      })
+      
+      $("#btnPerfil").click(function () {
+        $("#modalPerfil").modal('show')
       })
       
       

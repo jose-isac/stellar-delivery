@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row text-center">
+      <h1>Registro</h1>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <form class="form" action="" id="formRegistro">
+          <label class="form-label" for="usuario_nome_completo_reg">Nome completo</label>
+          <input class="form-control" type="text" placeholder="Seu nome completo" id="usuario_nome_completo_reg">
+    
+          <label class="form-label" for="usuario_cpf">CPF</label>
+          <spam class="form-label" id="cpf_error_message" style="visibility: hidden; color: red; font-weigth: bold;">| CPF Inválido!</spam>
+          <input class="form-control" type="text" required id="usuario_cpf_reg" placeholder="Digite seu CPF">
+    
+          <label class="form-label" for="usuario_email_reg">E-Mail</label>
+          <input class="form-control" type="email" required id="usuario_email_reg" placeholder="Digite seu email">
+    
+          <label class="form-label" for="usuario_senha_reg">Senha</label>
+          <input class="form-control" type="text" required id="usuario_senha_reg" placeholder="Digite sua senha">
+          <input class="form-control mt-2" type="text" required id="usuario_senha_confirm_reg" placeholder="Repita sua senha">
+    
+          <label class="form-label" for="usuario_telefone_reg">Telefone</label>
+          <input type="text" class="form-control" required id="usuario_telefone_reg" placeholder="Digite seu telefone">
+    
+          <label for="usuario_cep_reg">CEP</label>
+          <input type="text" class="form-control" required id="usuario_cep_reg" placeholder="Digite seu CEP">
+    
+          <label for="usuario_estado" class="form-label">Estado</label>
+          <input type="text" class="form-control" id="user_estado_reg" list="user_estado_data" required placeholder="Digite seu estado">
+          <datalist id="user_estado_data">
+            <option value="teste">Fictício</option>
+          </datalist>
+    
+          <label for="usuario_cidade_reg" class="form-label">Cidade</label>
+          <input type="text" id="usuario_cidade_reg" class="form-control" list="usuario_cidade_data" placeholder="Digite o nome da cidade">
+          <datalist id="usuario_cidade_data">
+            <option value="teste">Teste</option>
+          </datalist>
+    
+    
+          <label class="form-label" for="usuario_bairro_reg">Bairro</label>
+          <input type="text" id="usuario_bairro_reg" class="form-control" required placeholder="Digite o nome do seu bairro" list="usuario_bairro_data">
+          <datalist id="usuario_bairro_data">
+            <option value="teste">Teste</option>
+          </datalist>
+    
+          <label class="form-label" for="usuario_endereco_reg">Endereço</label>
+          <input type="text" class="form-control" required placeholder="Digite seu endereço" id="usuario_endereco_reg">
+    
+          <label class="form-label" for="usuario_numero_reg">Número da residência</label>
+          <input type="tel" class="form-control" id="usuario_numero_reg" required placeholder="Digite o número de sua residência">
+    
+          <label class="form-label" for="usuario_complemento_reg">Complemento</label>
+          <input type="text" class="form-control" id="usuario_complemento_reg" required placeholder="Digite um complemento">
+          
+          <button type="submit" id="btnRegistro" class="btn btn-success mt-4">Criar Conta</button>
+    
+          <hr>
+          <p>
+            <a href="#" id="aLogin">Já tem uma conta?</a>
+          </p>
+          <p>
+            <a href="#" id="a_Mrg_Administrador">Sou administrador</a>
+          </p>
+        </div>
+      </div>
+  </div>
+
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery3.js"></script>
+
+<script src="js/validacpf.js"></script>
+
+<script>
+  // Inicio do JQUERY
+  $(document).ready(function () {
+    // Testando se o cpf é valido
+    
+    $('#usuario_cpf_reg').focusout(function() {
+      let cpf = $('#usuario_cpf_reg').val()
+      
+      if (cpfValido(cpf)){
+        $('#cpf_error_message').css('visibility', 'hidden')
+      } else {
+        $('#usuario_cpf_reg').val('')
+        $('#cpf_error_message').css('visibility', 'visible')
+      }
+    })
+    
+    // Função para bloquear o submit caso tenha algum campo vazio.
+    
+    $("#formRegistro").submit(function(e) {
+      e.preventDefault();
+      
+      let campos_vazios = false;
+      
+      $('input[type="text"]').each(function () {
+        if ($(this).val() === '') {
+          campos_vazios = true;
+          return false;
+        }
+        
+        if (campos_vazios) {
+          alert('Por favor preencha todos os campos')
+        } else {
+          $("#formRegistro")[0].submit()
+        }
+        
+        $('#btnRegistro').prop('disabled', campos_vazios)
+      })
+    })
+  })
+</script>
+</body>
+
+</html>
