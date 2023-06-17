@@ -17,7 +17,7 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <form class="form" action="" id="formRegistro">
+        <form class="form" action="javascript:" id="formRegistro">
           <label class="form-label" for="usuario_nome_completo_reg">Nome completo</label>
           <input class="form-control" type="text" placeholder="Seu nome completo" id="usuario_nome_completo_reg">
     
@@ -40,15 +40,42 @@
           <input type="text" class="form-control" required id="usuario_cep_reg" placeholder="Digite seu CEP">
     
           <label for="usuario_estado" class="form-label">Estado</label>
-          <input type="text" class="form-control" id="user_estado_reg" list="user_estado_data" required placeholder="Digite seu estado">
+          <input type="text" class="form-control" id="usuario_estado_reg" list="user_estado_data" required placeholder="Digite seu estado">
           <datalist id="user_estado_data">
             <option value="teste">Fictício</option>
+            <option value="AC">Acre</option>
+            <option value="AL">Alagoas</option>
+            <option value="AM">Amazônia</option>
+            <option value="AP">Amapá</option>
+            <option value="BA">Bahia</option>
+            <option value="CE">Ceará</option>
+            <option value="DF">Distrito Federal</option>
+            <option value="ES">Espírito Santo</option>
+            <option value="GO">Goiânia</option>
+            <option value="MA">Maranhão</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="MS">Mato Grosso do Sul</option>
+            <option value="MT">Mato Grosso</option>
+            <option value="PA">Pará</option>
+            <option value="PB">Paraíba</option>
+            <option value="PE">Pernambuco</option>
+            <option value="PI">Piauí</option>
+            <option value="PR">Paraná</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="RN">Rio Grande do Norte</option>
+            <option value="RO">Rondônia</option>
+            <option value="RR">Roraima</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="SE">Sergipe</option>
+            <option value="SP">São Paulo</option>
+            <option value="TO">Tocantins</option>
           </datalist>
     
           <label for="usuario_cidade_reg" class="form-label">Cidade</label>
           <input type="text" id="usuario_cidade_reg" class="form-control" list="usuario_cidade_data" placeholder="Digite o nome da cidade">
           <datalist id="usuario_cidade_data">
-            <option value="teste">Teste</option>
+            
           </datalist>
     
     
@@ -90,6 +117,12 @@
 <script>
   // Inicio do JQUERY
   $(document).ready(function () {
+
+    $('#usuario_estado_reg').prop('disabled', true)
+    $('#usuario_cidade_reg').prop('disabled', true)
+    $('#usuario_bairro_reg').prop('disabled', true)
+    $('#usuario_endereco_reg').prop('disabled', true)
+    
     // Testando se o cpf é valido
     $('#usuario_cpf_reg').inputmask('999.999.999-99')
     $('#usuario_telefone_reg').inputmask('(99) 99999-9999')
@@ -135,6 +168,65 @@
       e.preventDefault() // Impede que redirecione normalmente
       window.location.href = $(this).attr('href') // Redireciona com javascript
     })
+
+    $('#usuario_cep_reg').blur(function() {
+      let cep = $(this).val()
+      if (cep.length > 0) {
+        $('#usuario_estado_reg').prop('disabled', false)
+        $('#usuario_cidade_reg').prop('disabled', false)
+        $('#usuario_bairro_reg').prop('disabled', false)
+        $('#usuario_endereco_reg').prop('disabled', false)
+      } else {
+        $('#usuario_estado_reg').val('')
+        $('#usuario_cidade_reg').val('')
+        $('#usuario_bairro_reg').val('')
+        $('#usuario_endereco_reg').val('')
+        $('#usuario_estado_reg').prop('disabled', true)
+        $('#usuario_cidade_reg').prop('disabled', true)
+        $('#usuario_bairro_reg').prop('disabled', true)
+        $('#usuario_endereco_reg').prop('disabled', true)
+      }
+    })
+
+    // Função para pesquisar CEP
+    $('#usuario_cep_reg').on('blur', function() {
+        var cep = $(this).val().replace(/\D/g, '');
+
+        if (cep.length === 8) {
+          var url = `https://viacep.com.br/ws/${cep}/json/`;
+
+          $.getJSON(url, function(data) {
+            if (!("erro" in data)) {
+              $('#usuario_estado_reg').val(data.uf);
+              $('#usuario_cidade_reg').val(data.localidade);
+              $('#usuario_endereco_reg').val(data.logradouro);
+              $('#usuario_bairro_reg').val(data.bairro);
+              $('#usuario_numero_reg').focus();
+            } else {
+              alert('CEP não encontrado.');
+            }
+          });
+        }
+      });
+
+      $('#usuario_estado_reg').on('change', function() {
+        var estado = $(this).val().toUpperCase();
+
+        // Limpar o campo de cidade
+        $('#usuario_cidade_reg').val('');
+
+        // Remover todas as opções existentes
+        $('#usuario_cidade_data').empty();
+
+        // Adicionar as opções de cidades do estado selecionado
+        $.getJSON(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estado}/municipios`, function(data) {
+          $.each(data, function(index, cidade) {
+            $('#usuario_cidade_data').append(`<option value="${cidade.nome}">${cidade.nome}</option>`);
+          });
+        });
+      });
+      
+
   })
 </script>
 </body>
