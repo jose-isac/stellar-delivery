@@ -22,7 +22,7 @@
           <input class="form-control" type="text" placeholder="Seu nome completo" id="usuario_nome_completo_reg">
     
           <label class="form-label" for="usuario_cpf">CPF</label>
-          <spam class="form-label" id="cpf_error_message" style="visibility: hidden; color: red; font-weigth: bold;">| CPF Inválido!</spam>
+          <spam class="form-label" id="cpf_error_message" style="visibility: hidden; color: red; font-weight: bold;">| CPF inválido!</spam>
           <input class="form-control" type="text" required id="usuario_cpf_reg" placeholder="Digite seu CPF">
     
           <label class="form-label" for="usuario_email_reg">E-Mail</label>
@@ -33,6 +33,7 @@
           <input class="form-control mt-2" type="text" required id="usuario_senha_confirm_reg" placeholder="Repita sua senha">
     
           <label class="form-label" for="usuario_telefone_reg">Telefone</label>
+          <spam class="form-label" id="telefone_error_message" style="visibility: hidden; color: red; font-weight: bold;">| Telefone inválido!</spam>
           <input type="text" class="form-control" required id="usuario_telefone_reg" placeholder="Digite seu telefone">
     
           <label for="usuario_cep_reg">CEP</label>
@@ -70,7 +71,7 @@
     
           <hr>
           <p>
-            <a href="#" id="aLogin">Já tem uma conta?</a>
+            <a href="index.html?abrirLogin=true" id="aLogin">Já tem uma conta?</a>
           </p>
           <p>
             <a href="#" id="a_Mrg_Administrador">Sou administrador</a>
@@ -83,6 +84,7 @@
 <script src="js/jquery3.js"></script>
 
 <script src="js/validacpf.js"></script>
+<script src="js/validarTelefone.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
 
 <script>
@@ -90,9 +92,10 @@
   $(document).ready(function () {
     // Testando se o cpf é valido
     $('#usuario_cpf_reg').inputmask('999.999.999-99')
+    $('#usuario_telefone_reg').inputmask('(99) 99999-9999')
     
-    $('#usuario_cpf_reg').focusout(function() {
-      let cpf = $('#usuario_cpf_reg').val().replace(/\D/g, '')
+    $('#usuario_cpf_reg').blur(function() {
+      let cpf = $(this).val().replace(/\D/g, '')
       
       if (cpfValido(cpf)){
         $('#cpf_error_message').css('visibility', 'hidden')
@@ -101,6 +104,7 @@
         $('#cpf_error_message').css('visibility', 'visible')
       }
     })
+
     
     // Função para bloquear o submit caso tenha algum campo vazio.
     
@@ -123,6 +127,13 @@
         
         $('#btnRegistro').prop('disabled', campos_vazios)
       })
+    })
+
+
+    // Função para mandar para a página index.html e abrir o modal de login
+    $("#aLogin").click(function (e) {
+      e.preventDefault() // Impede que redirecione normalmente
+      window.location.href = $(this).attr('href') // Redireciona com javascript
     })
   })
 </script>

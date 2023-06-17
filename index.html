@@ -15,11 +15,12 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-9 my-3">
+      <div class="col-md-8 my-3">
         <input class="form-control" type="text" name="" placeholder="O que você deseja?" id="">
       </div>
-      <div class="d-flex flex-row-reverse col-md-3 my-3">
+      <div class="d-flex flex-row-reverse col-md-4 my-3">
         <button class="btn btn-outline-secondary" id="btnPerfil">Meu perfil</button>
+        <button class="btn btn-outline-success mr-3" id="btnLogin">Login</button>
         <button class="btn btn-outline-primary mr-3" type="submit">Pesquisar</button>
       </div>
     </div>
@@ -112,10 +113,10 @@
               <input class="form-control" type="password" required id="usuario_senha" placeholder="Digite sua senha">
               <hr>
               <p>
-                <a href="#" id="aRegistro">Ainda não tem uma conta?</a>
+                <a href="registro.html" id="aRegistro">Ainda não tem uma conta?</a>
               </p>
               <p>
-                 <a href="" id="a_Ml_Administrador">Sou administrador</a>
+                 <a href="" id="aAdministrador">Sou administrador</a>
               </p>
               
           </div>
@@ -201,89 +202,31 @@
   
   <!-- Fim do modal produto -->
   
-  <!-- Inicio Modal Registro -->
-  
-  <div class="modal fade" id="janelaRegistro" tabindex="-1" aria-labelledby="titulo-registro" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 class="modal-title" id="titulo-registro">Registro</h3>
-          <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">X</button>
-        </div>
-        <div class="modal-body">
-          <div class="container">
-            
-            <form class="form" action="">
-              <label class="form-label" for="usuario_nome_completo_reg">Nome completo</label>
-              <input class="form-control" type="text" placeholder="Seu nome completo" id="usuario_nome_completo_reg">
-              
-              <label class="form-label" for="usuario_cpf">CPF</label>
-              <input class="form-control" type="text" required id="usuario_cpf_reg" placeholder="Digite seu CPF">
-              
-              <label class="form-label" for="usuario_email_reg">E-Mail</label>
-              <input class="form-control" type="email" required id="usuario_email_reg" placeholder="Digite seu email">
-              
-              <label class="form-label" for="usuario_senha_reg">Senha</label>
-              <input class="form-control" type="text" required id="usuario_senha_reg" placeholder="Digite sua senha">
-              <input class="form-control mt-2" type="text" required id="usuario_senha_confirm_reg" placeholder="Repita sua senha">
-              
-              <label class="form-label" for="usuario_telefone_reg">Telefone</label>
-              <input type="text" class="form-control" required id="usuario_telefone_reg" placeholder="Digite seu telefone">
-              
-              <label for="usuario_cep_reg">CEP</label>
-              <input type="text" class="form-control" required id="usuario_cep_reg" placeholder="Digite seu CEP">
-              
-              <label for="usuario_estado" class="form-label">Estado</label>
-              <input type="text" class="form-control" id="user_estado_reg" list="user_estado_data" required placeholder="Digite seu estado">
-              <datalist class="form-select" id="user_estado_data">
-                <option value="teste">Fictício</option>
-              </datalist>
-              
-              <label for="usuario_cidade_reg"class="form-label">Cidade</label>
-              <input type="text" id="usuario_cidade_reg" class="form-control" list="usuario_cidade_data" placeholder="Digite o nome da cidade">
-              <datalist id="usuario_cidade_data">
-                <option value="teste">teste</option>
-              </datalist> 
-              
-              
-              <label class="form-label" for="usuario_bairro_reg">Bairro</label>
-              <input type="text" id="usuario_bairro_reg" class="form-control" required placeholder="Digite o nome do seu bairro" list="usuario_bairro_data">
-              <datalist id="usuario_bairro_data">
-                <option value="teste">teste</option>
-              </datalist>
-              
-              <label class="form-label"  for="usuario_endereco_reg">Endereço</label>
-              <input type="text" class="form-control" required placeholder="Digite seu endereço" id="usuario_endereco_reg">
-              
-              <label class="form-label" for="usuario_numero_reg">Número da residência</label>
-              <input type="tel" class="form-control" id="usuario_numero_reg" required placeholder="Digite o número de sua residência">
-              
-              <label class="form-label" for="usuario_complemento_reg">Complemento</label>
-              <input type="text" class="form-control" id="usuario_complemento_reg" required placeholder="Digite um complemento">
-              
-              <hr>
-              <p>
-                <a href="#" id="aLogin">Já tem uma conta?</a>
-              </p>
-              <p>
-                 <a href="#" id="a_Mrg_Administrador">Sou administrador</a>
-              </p>
-              
-          </div>
-        </div>
-        <div class="modal-footer">
-          <input type="submit" class="btn btn-success" value="Criar conta" id="btnRegistro">
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
   
   <script src="js/bootstrap.bundle.js"></script>
   <script src="js/jquery3.js"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     $(document).ready(function() {
+
+      // Abrir o modal de login caso o usuário tenha voltado da página de registro
+
+      function abrirModalLogin() {
+        let urlParams = new URLSearchParams(window.location.search)
+        let abrirModalLogin = urlParams.get('abrirLogin')
+
+        if (abrirModalLogin === 'true'){
+          $('#janelaLogin').modal('show')
+        }
+      }
+
+      abrirModalLogin()
+
+      // Abrir modal de login
+      $('#btnLogin').click(function () {
+        $('#janelaLogin').modal('show')
+      })
+
       // Abrir o modal de produto ao clicar em algum card da tela principal
       $(".card").click(function(){
         let id_produto = $(this).attr("id")
@@ -325,12 +268,7 @@
         })
       })
       
-      // Função para mostrar modal de registro
-      $('#aRegistro').click(function() {
-        $('#janelaLogin').modal('hide')
-        $('#janelaRegistro').modal('show')
-      })
-      
+      // Mostrar perfil
       $("#btnPerfil").click(function () {
         $("#modalPerfil").modal('show')
       })
