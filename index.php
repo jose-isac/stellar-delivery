@@ -113,7 +113,7 @@
               <input class="form-control" type="password" required id="usuario_senha" placeholder="Digite sua senha">
               <hr>
               <p>
-                <a href="registro.html" id="aRegistro">Ainda não tem uma conta?</a>
+                <a href="registro.php" id="aRegistro">Ainda não tem uma conta?</a>
               </p>
               <p>
                  <a href="" id="aAdministrador">Sou administrador</a>

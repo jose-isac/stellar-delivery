@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+  <title>Registro</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 
@@ -98,7 +98,7 @@
     
           <hr>
           <p>
-            <a href="index.html?abrirLogin=true" id="aLogin">Já tem uma conta?</a>
+            <a href="index.php?abrirLogin=true" id="aLogin">Já tem uma conta?</a>
           </p>
           <p>
             <a href="#" id="a_Mrg_Administrador">Sou administrador</a>
@@ -161,6 +161,8 @@
         $('#btnRegistro').prop('disabled', campos_vazios)
       })
     })
+
+    
 
 
     // Função para mandar para a página index.html e abrir o modal de login
