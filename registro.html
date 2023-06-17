@@ -83,14 +83,16 @@
 <script src="js/jquery3.js"></script>
 
 <script src="js/validacpf.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.6/jquery.inputmask.min.js"></script>
 
 <script>
   // Inicio do JQUERY
   $(document).ready(function () {
     // Testando se o cpf é valido
+    $('#usuario_cpf_reg').inputmask('999.999.999-99')
     
     $('#usuario_cpf_reg').focusout(function() {
-      let cpf = $('#usuario_cpf_reg').val()
+      let cpf = $('#usuario_cpf_reg').val().replace(/\D/g, '')
       
       if (cpfValido(cpf)){
         $('#cpf_error_message').css('visibility', 'hidden')
