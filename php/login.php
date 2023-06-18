@@ -20,11 +20,14 @@ if($resultado->num_rows > 0){
     $_SESSION['usuario_cpf'] = $linha_tabela['usuario_cpf'];
     $_SESSION['usuario_cep'] = $linha_tabela['usuario_cep'];
     $_SESSION['usuario_estado'] = $linha_tabela['usuario_estado'];
-    $_SESSION['usuario_cidade'] = $linha_tabela['usuario_estado'];
+    $_SESSION['usuario_cidade'] = $linha_tabela['usuario_cidade'];
     $_SESSION['usuario_bairro'] = $linha_tabela['usuario_bairro'];
     $_SESSION['usuario_endereco'] = $linha_tabela['usuario_endereco'];
     $_SESSION['usuario_numero'] = $linha_tabela['usuario_numero'];
     $_SESSION['usuario_complemento'] = $linha_tabela['usuario_complemento'];
+    $_SESSION['usuario_foto'] = $linha_tabela['usuario_foto'];
+
+    $_SESSION['usuario_localizacao'] = $_SESSION['usuario_numero'] . ", " . $_SESSION['usuario_endereco'] . ", " . $_SESSION['usuario_bairro'] . ", " . $_SESSION['usuario_cidade'] . ", " . $_SESSION['usuario_estado'];
 
     $usuario_logado = $_SESSION['usuario'];
 

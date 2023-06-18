@@ -197,18 +197,18 @@ if(isset($_GET['login'])){
             <div class="row">
               <div class="col-md-4">
                 <div class="thumbnail">
-                  <img src="https://via.place holder.com/150" class="card-img" alt="Foto de perfil">
+                  <img src="php/user_images/<?php echo $_SESSION['usuario_foto']?>" class="card-img" alt="Foto de perfil">
                 </div>
               </div>
               <div class="col-md-8">
                 <label class="form-label" for="usuario_perfil_nome"><strong>Nome:</strong></label>
-                <p class="card-text" id="usuario_perfil_nome">Fulano de tal</p>
+                <p class="card-text" id="usuario_perfil_nome"><?php echo $_SESSION['usuario_nome']?></p>
 
                 <label class="form-label" for="usuario_perfil_telefone"><strong>Telefone:</strong></label>
-                <p class="card-text" id="usuario_perfil_telefone">(99) 99999-9999</p>
+                <p class="card-text" id="usuario_perfil_telefone"><?php echo $_SESSION['usuario_telefone']?></p>
 
                 <label class="form-label" for="usuario_perfil_localizacao"><strong>Localizacao:</strong></label>
-                <p class="card-text" id="usuario_perfil_localizacao">Nova York, EUA</p>
+                <p class="card-text" id="usuario_perfil_localizacao"><?php echo $_SESSION['usuario_localizacao']?></p>
               </div>
             </div>
           </div>
