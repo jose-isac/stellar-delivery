@@ -36,7 +36,7 @@ include('php/banco.php');
   </div>
   
   <div class="container">
-    <div class="d-flex flex-row">
+    <div class="row">
     <?php 
       $sql = "SELECT * FROM tb_alimentos WHERE alimento_destaque = 'S'";
       $resultado = $conexao_banco->query($sql);
