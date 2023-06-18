@@ -17,30 +17,33 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <form class="form" action="javascript:" id="formRegistro">
+        <form class="form" action="php/cadastro.php" id="formRegistro" method="POST">
           <label class="form-label" for="usuario_nome_completo_reg">Nome completo</label>
-          <input class="form-control" type="text" placeholder="Seu nome completo" id="usuario_nome_completo_reg">
+          <input class="form-control" type="text" placeholder="Seu nome completo" id="usuario_nome_completo_reg" name="usuario_nome">
     
           <label class="form-label" for="usuario_cpf">CPF</label>
           <spam class="form-label" id="cpf_error_message" style="visibility: hidden; color: red; font-weight: bold;">| CPF inválido!</spam>
-          <input class="form-control" type="text" required id="usuario_cpf_reg" placeholder="Digite seu CPF">
+          <input class="form-control" type="text" required id="usuario_cpf_reg" placeholder="Digite seu CPF" name="usuario_cpf">
     
           <label class="form-label" for="usuario_email_reg">E-Mail</label>
-          <input class="form-control" type="email" required id="usuario_email_reg" placeholder="Digite seu email">
+          <input class="form-control" type="email" required id="usuario_email_reg" placeholder="Digite seu email" name="usuario_email">
     
           <label class="form-label" for="usuario_senha_reg">Senha</label>
-          <input class="form-control" type="text" required id="usuario_senha_reg" placeholder="Digite sua senha">
+          <input class="form-control" type="text" required id="usuario_senha_reg" placeholder="Digite sua senha" name="usuario_senha">
           <input class="form-control mt-2" type="text" required id="usuario_senha_confirm_reg" placeholder="Repita sua senha">
     
           <label class="form-label" for="usuario_telefone_reg">Telefone</label>
           <spam class="form-label" id="telefone_error_message" style="visibility: hidden; color: red; font-weight: bold;">| Telefone inválido!</spam>
-          <input type="text" class="form-control" required id="usuario_telefone_reg" placeholder="Digite seu telefone">
+          <input type="text" class="form-control" required id="usuario_telefone_reg" placeholder="Digite seu telefone" name="usuario_telefone">
+
+          <label class="form-label" for="foto">Foto de perfil(opcional)</label>
+          <input class="form-control" type="file" name="fotoPerfil" id="fotoPerfil">
     
           <label for="usuario_cep_reg">CEP</label>
-          <input type="text" class="form-control" required id="usuario_cep_reg" placeholder="Digite seu CEP">
+          <input type="text" class="form-control" required id="usuario_cep_reg" placeholder="Digite seu CEP" name="usuario_cep">
     
           <label for="usuario_estado" class="form-label">Estado</label>
-          <input type="text" class="form-control" id="usuario_estado_reg" list="user_estado_data" required placeholder="Digite seu estado">
+          <input type="text" class="form-control" id="usuario_estado_reg" list="user_estado_data" required placeholder="Digite seu estado" name="usuario_estado">
           <datalist id="user_estado_data">
             <option value="teste">Fictício</option>
             <option value="AC">Acre</option>
@@ -73,26 +76,26 @@
           </datalist>
     
           <label for="usuario_cidade_reg" class="form-label">Cidade</label>
-          <input type="text" id="usuario_cidade_reg" class="form-control" list="usuario_cidade_data" placeholder="Digite o nome da cidade">
+          <input type="text" id="usuario_cidade_reg" class="form-control" list="usuario_cidade_data" placeholder="Digite o nome da cidade" name="usuario_cidade">
           <datalist id="usuario_cidade_data">
             
           </datalist>
     
     
           <label class="form-label" for="usuario_bairro_reg">Bairro</label>
-          <input type="text" id="usuario_bairro_reg" class="form-control" required placeholder="Digite o nome do seu bairro" list="usuario_bairro_data">
+          <input type="text" id="usuario_bairro_reg" class="form-control" required placeholder="Digite o nome do seu bairro" list="usuario_bairro_data" name="usuario_bairro">
           <datalist id="usuario_bairro_data">
             <option value="teste">Teste</option>
           </datalist>
     
           <label class="form-label" for="usuario_endereco_reg">Endereço</label>
-          <input type="text" class="form-control" required placeholder="Digite seu endereço" id="usuario_endereco_reg">
+          <input type="text" class="form-control" required placeholder="Digite seu endereço" id="usuario_endereco_reg" name="usuario_endereco" >
     
           <label class="form-label" for="usuario_numero_reg">Número da residência</label>
-          <input type="tel" class="form-control" id="usuario_numero_reg" required placeholder="Digite o número de sua residência">
+          <input type="tel" class="form-control" id="usuario_numero_reg" required placeholder="Digite o número de sua residência" name="usuario_numero">
     
           <label class="form-label" for="usuario_complemento_reg">Complemento</label>
-          <input type="text" class="form-control" id="usuario_complemento_reg" required placeholder="Digite um complemento">
+          <input type="text" class="form-control" id="usuario_complemento_reg" required placeholder="Digite um complemento" name="usuario_complemento">
           
           <button type="submit" id="btnRegistro" class="btn btn-success mt-4">Criar Conta</button>
     
@@ -138,33 +141,7 @@
       }
     })
 
-    
-    // Função para bloquear o submit caso tenha algum campo vazio.
-    
-    $("#formRegistro").submit(function(e) {
-      e.preventDefault();
-      
-      let campos_vazios = false;
-      
-      $('input[type="text"]').each(function () {
-        if ($(this).val() === '') {
-          campos_vazios = true;
-          return false;
-        }
-        
-        if (campos_vazios) {
-          alert('Por favor preencha todos os campos')
-        } else {
-          $("#formRegistro")[0].submit()
-        }
-        
-        $('#btnRegistro').prop('disabled', campos_vazios)
-      })
-    })
-
-    
-
-
+       
     // Função para mandar para a página index.html e abrir o modal de login
     $("#aLogin").click(function (e) {
       e.preventDefault() // Impede que redirecione normalmente
@@ -227,6 +204,18 @@
           });
         });
       });
+
+      // Função para verificar se as senhas são iguais
+
+      $('#usuario_senha_confirm_reg').blur(function() {
+        let senha1 = $('#usuario_senha_reg').val()
+        let senha2 = $(this).val()
+
+        if (senha2 != senha1){
+          $(this).val('')
+          alert('As senhas não conferem!')
+        }
+      })
       
 
   })
