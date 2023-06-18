@@ -1,3 +1,7 @@
+<?php 
+include('php/sessao.php');
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -19,8 +23,13 @@
         <input class="form-control" type="text" name="" placeholder="O que você deseja?" id="">
       </div>
       <div class="d-flex flex-row-reverse col-md-4 my-3">
-        <button class="btn btn-outline-secondary" id="btnPerfil">Meu perfil</button>
-        <button class="btn btn-outline-success mr-3" id="btnLogin">Login</button>
+        <?php
+          if(isset($_SESSION['login'])){
+            echo '<button class="btn btn-outline-secondary" id="btnPerfil">Meu perfil</button>';
+          } else {
+            echo '<button class="btn btn-outline-success mr-3" id="btnLogin">Login</button>';
+          }
+        ?>
         <button class="btn btn-outline-primary mr-3" type="submit">Pesquisar</button>
       </div>
     </div>
@@ -95,6 +104,16 @@
   
   <!-- Modal Login-->
   
+<?php
+if(isset($_GET['login'])){
+  if(($_GET['login']) == 'erro'){
+    echo '<script>
+      alert("Erro no login!")
+    </script>';
+  }
+}
+?>
+
   <div class="modal fade" id="janelaLogin" tabindex="-1" aria-labelledby="titulo-login" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -105,12 +124,12 @@
         <div class="modal-body">
           <div class="container">
             
-            <form class="form" action="">
+            <form id="formLogin" class="form" action="php/login.php" method="POST">
               <label class="form-label" for="usuario_email">E-Mail</label>
-              <input class="form-control" type="email" placeholder="Digite seu e-mail" id="usuario_email">
+              <input class="form-control" type="email" placeholder="Digite seu e-mail" id="usuario_email" name="usuario_email">
               
               <label class="form-label" for="usuario_senha">Senha</label>
-              <input class="form-control" type="password" required id="usuario_senha" placeholder="Digite sua senha">
+              <input class="form-control" type="password" required id="usuario_senha" placeholder="Digite sua senha" name="usuario_senha">
               <hr>
               <p>
                 <a href="registro.php" id="aRegistro">Ainda não tem uma conta?</a>
@@ -195,6 +214,7 @@
           </div>
         </div>
         <div class="modal-footer">
+          <a href="php/sair.php" class="btn btn-outline-danger" id="btnLogout">Sair</a>
           <a href="#" class="btn btn-warning" id="aUsuarioAlterar">Ver mais informações e alterar</a>
           <button type="submit" class="btn btn-primary" id="btn_fechar">Fechar</button>
         </div>
@@ -229,6 +249,15 @@
       $('#btnLogin').click(function () {
         $('#janelaLogin').modal('show')
       })
+
+      // Realizar login:
+
+      //$('#formLogin').submit(function() {
+      //  let email = $('#usuario_email').val()
+      //  let senha = $('#usuario_senha').val()
+
+      //  $.post('php/login.php', {usuario_email: email, usuario_senha: senha})
+     // })
 
       // Abrir o modal de produto ao clicar em algum card da tela principal
       $(".card").click(function(){
