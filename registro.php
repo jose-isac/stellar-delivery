@@ -17,7 +17,7 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <form class="form" action="php/cadastro.php" id="formRegistro" method="POST">
+        <form class="form" action="php/cadastro.php" id="formRegistro" method="POST" enctype="multipart/form-data">
           <label class="form-label" for="usuario_nome_completo_reg">Nome completo</label>
           <input class="form-control" type="text" placeholder="Seu nome completo" id="usuario_nome_completo_reg" name="usuario_nome">
     
