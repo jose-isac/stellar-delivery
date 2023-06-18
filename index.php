@@ -1,6 +1,6 @@
 <?php 
 include('php/sessao.php');
-
+include('php/banco.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,69 +36,29 @@ include('php/sessao.php');
   </div>
   
   <div class="container">
-    <div class="row">
-      <div class="col-md-4 my-3">
-        <div class="card" id="1">
-          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 1">
-          <div class="card-body">
-            <h5 class="card-title">Produto 1</h5>
-            <p class="card-text">Descrição do Produto 1.</p>
-            <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 my-3">
-        <div class="card" id="2">
-          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 2">
-          <div class="card-body">
-            <h5 class="card-title">Produto 2</h5>
-            <p class="card-text">Descrição do Produto 2.</p>
-            <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 my-3">
-        <div class="card" id="3">
-          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 3">
-          <div class="card-body">
-            <h5 class="card-title">Produto 3</h5>
-            <p class="card-text">Descrição do Produto 3.</p>
-            <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row mt-4">
-      <div class="col-md-4 my-4">
-        <div class="card" id="4">
-          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 4">
-          <div class="card-body">
-            <h5 class="card-title">Produto 4</h5>
-            <p class="card-text">Descrição do Produto 4.</p>
-            <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 my-4">
-        <div class="card" id="5">
-          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 5">
-          <div class="card-body">
-            <h5 class="card-title">Produto 5</h5>
-            <p class="card-text">Descrição do Produto 5.</p>
-            <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4 my-4">
-        <div class="card" id="6">
-          <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 6">
-          <div class="card-body">
-            <h5 class="card-title">Produto 6</h5>
-            <p class="card-text">Descrição do Produto 6.</p>
-            <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
-          </div>
-        </div>
-      </div>
+    <div class="d-flex flex-row">
+    <?php 
+      $sql = "SELECT * FROM tb_alimentos WHERE alimento_destaque = 'S'";
+      $resultado = $conexao_banco->query($sql);
+      
+      if ($resultado){
+        if ($resultado->num_rows > 0){
+          while ($linha = $resultado->fetch_array(MYSQLI_ASSOC)){
+            echo 
+                  '<div class="col-md-4 my-3">
+                    <div class="card" id="'.$linha['alimento_nome'].'" data-descricao= "'.$linha['alimento_descricao'].'" data-categoria="'.$linha['alimento_categoria'].'" data-preco="'.$linha['alimento_preco'].'" data-disponivel="'.$linha['alimento_disponivel'].'">
+                      <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 1">
+                      <div class="card-body">
+                        <h5 class="card-title">'.$linha['alimento_nome'].'</h5>
+                        <p class="card-text">'.$linha['alimento_descricao'].'</p>
+                        <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
+                      </div>
+                    </div>
+                  </div>';
+          }
+        }
+      }
+    ?>
     </div>
   </div>
   
@@ -168,7 +128,11 @@ if(isset($_GET['login'])){
                 </div>
               </div>
               <div class="col-md-8">
-                <p>Este alimento é assim assim assado.</p>
+                <p id="produto_categoria"></p>
+                <p id="produto_descricao"></p>
+                <p id="produto_preco"></p>
+                <p id="produto_disponivel"></p>
+                <input class="form-control" type="range" name="compra_qntd" id="compra_qntd" min="1" max=""><span id="mostrador"></span>
               </div>
             </div>
           </div>
@@ -223,7 +187,7 @@ if(isset($_GET['login'])){
     
   </div>
   
-  <!-- Fim do modal produto -->
+  <!-- Fim do modal perfil -->
   
   
   <script src="js/bootstrap.bundle.js"></script>
@@ -261,11 +225,31 @@ if(isset($_GET['login'])){
 
       // Abrir o modal de produto ao clicar em algum card da tela principal
       $(".card").click(function(){
-        let id_produto = $(this).attr("id")
         
-        $("#produto_titulo").text("Produto " + id_produto)
+        let titulo = $(this).attr('id')
+        let descricao = $(this).attr('data-descricao')
+        let categoria = $(this).attr('data-categoria')
+        let preco = $(this).attr('data-preco')
+        let disponivel = $(this).attr('data-disponivel')
+        
+        $('#produto_titulo').text(titulo)
+        $('#produto_descricao').text(descricao)
+        $('#produto_preco').text('R$ ' + preco)
+        $('#produto_categoria').text(categoria)
+        $('#produto_disponivel').text(disponivel)
+
+        $('#mostrador').text('')
+        $('#compra_qntd').attr('max', '0')
+        $('#compra_qntd').attr('max', disponivel)
         
         $("#modalProduto").modal('show');
+      })
+
+      // Ao mudar o valor do range, mostrar a quantidade selecionada
+
+      $('#compra_qntd').change(function () {
+        let qntd_atual = $(this).val()
+        $('#mostrador').text(qntd_atual)
       })
       
       // Ao clicar no botão de comprar, exibir sweet alert dizendo que deu certo
