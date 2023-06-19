@@ -51,7 +51,6 @@ include('php/banco.php');
                       <div class="card-body">
                         <h5 class="card-title">'.$linha['alimento_nome'].'</h5>
                         <p class="card-text">'.$linha['alimento_descricao'].'</p>
-                        <a href="#" class="btn btn-primary">Adicionar ao Carrinho</a>
                       </div>
                     </div>
                   </div>';
@@ -179,7 +178,7 @@ if(isset($_GET['login'])){
         </div>
         <div class="modal-footer">
           <a href="php/sair.php" class="btn btn-outline-danger" id="btnLogout">Sair</a>
-          <a href="#" class="btn btn-warning" id="aUsuarioAlterar">Ver mais informações e alterar</a>
+          <a href="alterarPerfil.php" class="btn btn-warning" id="aUsuarioAlterar">Ver mais informações e alterar</a>
           <button type="submit" class="btn btn-primary" id="btn_fechar">Fechar</button>
         </div>
       </div>
@@ -207,7 +206,17 @@ if(isset($_GET['login'])){
         }
       }
 
+      function abrirModalPerfil() {
+        let urlParams = new URLSearchParams(window.location.search)
+        let abrirModalPerfil = urlParams.get('abrirPerfil')
+
+        if (abrirModalPerfil === 'true'){
+          $('#modalPerfil').modal('show')
+        }
+      }
+
       abrirModalLogin()
+      abrirModalPerfil()
 
       // Abrir modal de login
       $('#btnLogin').click(function () {

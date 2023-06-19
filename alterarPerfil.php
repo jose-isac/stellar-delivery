@@ -1,49 +1,56 @@
+<?php 
+include('php/sessao.php');
+include('php/banco.php');
+
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Stellar Delivery 🌠🍰 | Registro</title>
+  <title>Stellar Delivery 🌠🍰 | Alterar Perfil</title>
   <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 
 <body>
   <div class="container">
     <div class="row text-center">
-      <h1>Registro</h1>
+      <h1>Alterar</h1>
+      <h2><?php echo $_SESSION['usuario_nome'];?></h2>
     </div>
   </div>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-8">
-        <form class="form" action="php/cadastro.php" id="formRegistro" method="POST" enctype="multipart/form-data">
+        <form class="form" action="php/alterar.php" id="formAlterar" method="POST" enctype="multipart/form-data">
           <label class="form-label" for="usuario_nome_completo_reg">Nome completo</label>
-          <input class="form-control" type="text" placeholder="Seu nome completo" id="usuario_nome_completo_reg" name="usuario_nome">
+          <input class="form-control" type="text" placeholder="Seu nome completo" id="usuario_nome_completo_reg" name="usuario_nome" value="<?php echo $_SESSION['usuario_nome'];?>">
     
           <label class="form-label" for="usuario_cpf">CPF</label>
           <spam class="form-label" id="cpf_error_message" style="visibility: hidden; color: red; font-weight: bold;">| CPF inválido!</spam>
-          <input class="form-control" type="text" required id="usuario_cpf_reg" placeholder="Digite seu CPF" name="usuario_cpf">
+          <input class="form-control" type="text" required id="usuario_cpf_reg" placeholder="Digite seu CPF" name="usuario_cpf" value="<?php echo $_SESSION['usuario_cpf'];?>">
     
           <label class="form-label" for="usuario_email_reg">E-Mail</label>
-          <input class="form-control" type="email" required id="usuario_email_reg" placeholder="Digite seu email" name="usuario_email">
+          <input class="form-control" type="email" required id="usuario_email_reg" placeholder="Digite seu email" name="usuario_email" value="<?php echo $_SESSION['usuario_email'];?>">
     
           <label class="form-label" for="usuario_senha_reg">Senha</label>
-          <input class="form-control" type="text" required id="usuario_senha_reg" placeholder="Digite sua senha" name="usuario_senha">
-          <input class="form-control mt-2" type="text" required id="usuario_senha_confirm_reg" placeholder="Repita sua senha">
+          <input class="form-control" type="text" required id="usuario_senha_reg" placeholder="Digite sua senha" name="usuario_senha" value="<?php echo $_SESSION['usuario_senha']; ?>">
+          <input class="form-control mt-2" type="text" required id="usuario_senha_confirm_reg" placeholder="Repita sua senha" value="<?php echo $_SESSION['usuario_senha'];?>">
     
           <label class="form-label" for="usuario_telefone_reg">Telefone</label>
           <spam class="form-label" id="telefone_error_message" style="visibility: hidden; color: red; font-weight: bold;">| Telefone inválido!</spam>
-          <input type="text" class="form-control" required id="usuario_telefone_reg" placeholder="Digite seu telefone" name="usuario_telefone">
+          <input type="text" class="form-control" required id="usuario_telefone_reg" placeholder="Digite seu telefone" name="usuario_telefone" value="<?php echo $_SESSION['usuario_telefone']; ?>">
 
           <label class="form-label" for="foto">Foto de perfil(opcional)</label>
           <input class="form-control" type="file" name="fotoPerfil" id="fotoPerfil">
     
           <label for="usuario_cep_reg">CEP</label>
-          <input type="text" class="form-control" required id="usuario_cep_reg" placeholder="Digite seu CEP" name="usuario_cep">
+          <input type="text" class="form-control" required id="usuario_cep_reg" placeholder="Digite seu CEP" name="usuario_cep" value="<?php echo $_SESSION['usuario_cep'];?>">
     
           <label for="usuario_estado" class="form-label">Estado</label>
-          <input type="text" class="form-control" id="usuario_estado_reg" list="user_estado_data" required placeholder="Digite seu estado" name="usuario_estado">
+          <input type="text" class="form-control" id="usuario_estado_reg" list="user_estado_data" required placeholder="Digite seu estado" name="usuario_estado" value="<?php echo $_SESSION['usuario_estado'] ?>">
           <datalist id="user_estado_data">
             <option value="teste">Fictício</option>
             <option value="AC">Acre</option>
@@ -76,35 +83,32 @@
           </datalist>
     
           <label for="usuario_cidade_reg" class="form-label">Cidade</label>
-          <input type="text" id="usuario_cidade_reg" class="form-control" list="usuario_cidade_data" placeholder="Digite o nome da cidade" name="usuario_cidade">
+          <input type="text" id="usuario_cidade_reg" class="form-control" list="usuario_cidade_data" placeholder="Digite o nome da cidade" name="usuario_cidade" value="<?php echo $_SESSION['usuario_cidade'];?>">
           <datalist id="usuario_cidade_data">
             
           </datalist>
     
     
           <label class="form-label" for="usuario_bairro_reg">Bairro</label>
-          <input type="text" id="usuario_bairro_reg" class="form-control" required placeholder="Digite o nome do seu bairro" list="usuario_bairro_data" name="usuario_bairro">
+          <input type="text" id="usuario_bairro_reg" class="form-control" required placeholder="Digite o nome do seu bairro" list="usuario_bairro_data" name="usuario_bairro" value="<?php echo $_SESSION['usuario_bairro'];?>">
           <datalist id="usuario_bairro_data">
             <option value="teste">Teste</option>
           </datalist>
     
           <label class="form-label" for="usuario_endereco_reg">Endereço</label>
-          <input type="text" class="form-control" required placeholder="Digite seu endereço" id="usuario_endereco_reg" name="usuario_endereco" >
+          <input type="text" class="form-control" required placeholder="Digite seu endereço" id="usuario_endereco_reg" name="usuario_endereco" value="<?php echo $_SESSION['usuario_endereco'];?>">
     
           <label class="form-label" for="usuario_numero_reg">Número da residência</label>
-          <input type="tel" class="form-control" id="usuario_numero_reg" required placeholder="Digite o número de sua residência" name="usuario_numero">
+          <input type="tel" class="form-control" id="usuario_numero_reg" required placeholder="Digite o número de sua residência" name="usuario_numero" value="<?php echo $_SESSION['usuario_numero'];?>">
     
           <label class="form-label" for="usuario_complemento_reg">Complemento</label>
-          <input type="text" class="form-control" id="usuario_complemento_reg" required placeholder="Digite um complemento" name="usuario_complemento">
+          <input type="text" class="form-control" id="usuario_complemento_reg" required placeholder="Digite um complemento" name="usuario_complemento" value="<?php echo $_SESSION['usuario_complemento'];?>">
           
-          <button type="submit" id="btnRegistro" class="btn btn-success mt-4">Criar Conta</button>
+          <button type="submit" id="btnAlterar" class="btn btn-success mt-4">Salvar alterações</button>
     
           <hr>
           <p>
-            <a href="index.php?abrirLogin=true" id="aLogin">Já tem uma conta?</a>
-          </p>
-          <p>
-            <a href="#" id="a_Mrg_Administrador">Sou administrador</a>
+            <a class="btn btn-info" href="index.php?abrirPerfil=true" id="aVoltar">Voltar</a>
           </p>
         </div>
       </div>
@@ -121,10 +125,7 @@
   // Inicio do JQUERY
   $(document).ready(function () {
 
-    $('#usuario_estado_reg').prop('disabled', true)
-    $('#usuario_cidade_reg').prop('disabled', true)
-    $('#usuario_bairro_reg').prop('disabled', true)
-    $('#usuario_endereco_reg').prop('disabled', true)
+    alertAlteracaoSucesso()
     
     // Testando se o cpf é valido
     $('#usuario_cpf_reg').inputmask('999.999.999-99')
@@ -143,7 +144,7 @@
 
        
     // Função para mandar para a página index.html e abrir o modal de login
-    $("#aLogin").click(function (e) {
+    $("#aVoltar").click(function (e) {
       e.preventDefault() // Impede que redirecione normalmente
       window.location.href = $(this).attr('href') // Redireciona com javascript
     })
@@ -216,7 +217,17 @@
           alert('As senhas não conferem!')
         }
       })
-      
+
+      function alertAlteracaoSucesso() {
+        let urlParams = new URLSearchParams(window.location.search)
+        let alteracaoSucesso = urlParams.get('alteracao')
+
+        if (alteracaoSucesso === 'ok'){
+          alert('Alteração feita com sucesso!')
+        } else {
+          alert('Ocorreu um erro na alteração!')
+        }
+      }
 
   })
 </script>
