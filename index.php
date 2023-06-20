@@ -285,7 +285,7 @@ if(isset($_GET['login'])){
             Swal.fire({
               title: 'Sucesso!',
               icon: 'success',
-              text: 'Compra realizada com sucesso!'
+              text: 'O disco voador está a caminho!'
             })
             
             $('#modalProduto').modal('hide')
