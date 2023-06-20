@@ -224,7 +224,8 @@ include('php/banco.php');
 
         if (alteracaoSucesso === 'ok'){
           alert('Alteração feita com sucesso!')
-        } else {
+        } 
+        if (alteracaoSucesso === 'erro'){
           alert('Ocorreu um erro na alteração!')
         }
       }
