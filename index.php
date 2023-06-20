@@ -140,11 +140,17 @@ if(isset($_GET['login'])){
                 </div>
               </div>
               <div class="col-md-8">
-                <p id="produto_categoria"></p>
-                <p id="produto_descricao"></p>
-                <p id="produto_preco"></p>
-                <p id="produto_disponivel"></p>
-                <input class="form-control" type="range" name="compra_qntd" id="compra_qntd" min="1" max=""><span id="mostrador"></span>
+                <span style="visibility: hidden; "id="produto_id"></span>
+                <ul style="list-style-type: none;">
+                  <li><strong>Categoria: </strong><span id="produto_categoria"></span></li>
+                  <li><strong>Descrição: </strong><span id="produto_descricao"></span></li>
+                  <li><strong>Preço: </strong><span id="produto_preco"></span></li>
+                  <li><strong>Quantidade disponível: </strong><span id="produto_disponivel"></span></li>
+                  <li><strong>Quantidade desejada:</strong></li>
+                  <li class="mt-2"><input class="form-control" type="range" name="compra_qntd" id="compra_qntd" min="1" max=""><span id="mostrador"></span></li>
+                  <li class="mt-4"><span id="mensagem_esgotado" style="color: red;">Já comeram tudo!</span></li>
+                </ul>
+                
               </div>
             </div>
           </div>
@@ -208,6 +214,10 @@ if(isset($_GET['login'])){
   <script>
     $(document).ready(function() {
 
+      // Por padrão, esconde a mensagem de produto esgotado.
+
+      $("#mensagem_esgotado").hide()
+
       // Abrir o modal de login caso o usuário tenha voltado da página de registro
 
       function abrirModalLogin() {
@@ -236,14 +246,6 @@ if(isset($_GET['login'])){
         $('#janelaLogin').modal('show')
       })
 
-      // Realizar login:
-
-      //$('#formLogin').submit(function() {
-      //  let email = $('#usuario_email').val()
-      //  let senha = $('#usuario_senha').val()
-
-      //  $.post('php/login.php', {usuario_email: email, usuario_senha: senha})
-     // })
 
       // Abrir o modal de produto ao clicar em algum card da tela principal
       $(".card").click(function(){
@@ -253,11 +255,21 @@ if(isset($_GET['login'])){
         let categoria = $(this).attr('data-categoria')
         let preco = $(this).attr('data-preco')
         let disponivel = $(this).attr('data-disponivel')
+        let id = $(this).attr('data-alimentoid')
         
+        $('#produto_id').text(id)
         $('#produto_titulo').text(titulo)
         $('#produto_descricao').text(descricao)
         $('#produto_preco').text('R$ ' + preco)
         $('#produto_categoria').text(categoria)
+
+        // Se não tiver mais disponivel, ele oculta os botoes.
+        if (disponivel <= 0){
+          $('#mostrador').hide()
+          $('#compra_qntd').hide()
+          $('#btn_comprar').hide()
+          $('#mensagem_esgotado').show()
+        }
         $('#produto_disponivel').text(disponivel)
 
         $('#mostrador').text('')
@@ -267,6 +279,16 @@ if(isset($_GET['login'])){
         $("#modalProduto").modal('show');
       })
 
+      // Função para que quando o modal de produto for fechado
+      // ele faça os botões aparecerem e a mensagem de esgotado
+      // desaparecer
+      $('#modalProduto').on('hidden.bs.modal', function(){
+          $('#mostrador').show()
+          $('#compra_qntd').show()
+          $('#btn_comprar').show()
+          $('#mensagem_esgotado').hide()
+      })
+
       // Ao mudar o valor do range, mostrar a quantidade selecionada
 
       $('#compra_qntd').change(function () {
@@ -274,43 +296,58 @@ if(isset($_GET['login'])){
         $('#mostrador').text(qntd_atual)
       })
       
+
       // Ao clicar no botão de comprar, exibir sweet alert dizendo que deu certo
+      
       $('#btn_comprar').click(function() {
 
         let usuario = $('#caixa_usuario').val()
+        let alimento = $('#produto_id').text()
+        let quantidade = $('#compra_qntd').val()
 
         if (usuario != ''){
 
-          
+          $.post('php/novopedido.php', {usuario_id: usuario, alimento_id: alimento, alimento_quantidade: quantidade}, function(retorno){
 
-            Swal.fire({
-            title: "Aviso",
-            html: "Transação em andamento...",
-            timer: 2000,
-            timerProgressBar: true,
-            didOpen: () => {
-              Swal.showLoading()
-              const b = Swal.getHtmlContainer().querySelector('b')
-              
-              timerInterval = setInterval(() => {
-                b.textContent = Swal.getTimerLeft()
-                
-              }, 100)
-            },
-            willClose: () => {
-              clearInterval(timerInterval)
-            }
-          }).then((result) => {
-            if (result.dismiss === Swal.DismissReason.timer){
-              Swal.fire({
-                title: 'Sucesso!',
-                icon: 'success',
-                text: 'O disco voador está a caminho!'
-              })
-              
-              $('#modalProduto').modal('hide')
-            }
+              if (retorno === 'certo'){
+                      Swal.fire({
+                      title: "Aviso",
+                      html: "Transação em andamento...",
+                      timer: 2000,
+                      timerProgressBar: true,
+                      didOpen: () => {
+                        Swal.showLoading()
+                        const b = Swal.getHtmlContainer().querySelector('b')
+                        
+                        timerInterval = setInterval(() => {
+                          b.textContent = Swal.getTimerLeft()
+                          
+                        }, 100)
+                      },
+                      willClose: () => {
+                        clearInterval(timerInterval)
+                      }
+                    }).then((result) => {
+                      if (result.dismiss === Swal.DismissReason.timer){
+                        Swal.fire({
+                          title: 'Sucesso!',
+                          icon: 'success',
+                          text: 'O disco voador está a caminho!'
+                        })
+                        
+                        $('#modalProduto').modal('hide')
+                      }
+                    })
+                } else {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Ops...',
+                    text: 'Aparentemente, a nave está sem combústivel!'
+                })
+                }
           })
+
+            
         } else {
           $('#modalProduto').modal('hide')
           $('#janelaLogin').modal('show')
