@@ -20,7 +20,7 @@ include('php/banco.php');
     </div>
     <div class="row">
       <div class="col-md-8 my-3">
-        <input class="form-control" type="text" name="" placeholder="O que você deseja?" id="">
+        <input class="form-control" type="text" name="" placeholder="O que você deseja?" id="caixa_pesquisa">
       </div>
       <div class="d-flex flex-row-reverse col-md-4 my-3">
         <?php
@@ -30,13 +30,13 @@ include('php/banco.php');
             echo '<button class="btn btn-outline-success mr-3" id="btnLogin">Login</button>';
           }
         ?>
-        <button class="btn btn-outline-primary mr-3" type="submit">Pesquisar</button>
+        <button class="btn btn-outline-primary mr-3" id="btnPesquisar" type="submit">Pesquisar</button>
       </div>
     </div>
   </div>
   
   <div class="container">
-    <div class="row">
+    <div class="row" id="conteudo_principal">
     <?php 
       $sql = "SELECT * FROM tb_alimentos WHERE alimento_destaque = 'S'";
       $resultado = $conexao_banco->query($sql);
@@ -46,7 +46,7 @@ include('php/banco.php');
           while ($linha = $resultado->fetch_array(MYSQLI_ASSOC)){
             echo 
                   '<div class="col-md-4 my-3">
-                    <div class="card" id="'.$linha['alimento_nome'].'" data-descricao= "'.$linha['alimento_descricao'].'" data-categoria="'.$linha['alimento_categoria'].'" data-preco="'.$linha['alimento_preco'].'" data-disponivel="'.$linha['alimento_disponivel'].'">
+                    <div class="card" data-alimentoid = "'.$linha['alimento_id'].'" id="'.$linha['alimento_nome'].'" data-descricao= "'.$linha['alimento_descricao'].'" data-categoria="'.$linha['alimento_categoria'].'" data-preco="'.$linha['alimento_preco'].'" data-disponivel="'.$linha['alimento_disponivel'].'">
                       <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 1">
                       <div class="card-body">
                         <h5 class="card-title">'.$linha['alimento_nome'].'</h5>
@@ -296,6 +296,20 @@ if(isset($_GET['login'])){
       // Mostrar perfil
       $("#btnPerfil").click(function () {
         $("#modalPerfil").modal('show')
+      })
+
+      //Função para realizar a pesquisa
+
+      $('#btnPesquisar').click(function() {
+        let texto = $('#caixa_pesquisa').val()
+        
+        $.post('php/busca.php', {pesquisa: texto}, function(retorno){
+          if (retorno != '0') {
+            $('#conteudo_principal').html(retorno)
+          } else {
+            $('#conteudo_principal').html("<div class='container'><h3>Este alimento caiu em um buraco negro!</h3></div>")
+          }
+        })
       })
       
       
