@@ -12,7 +12,19 @@ include('php/banco.php');
 </head>
 
 <body>
-  <div class="container">
+
+  <!--
+    Este campo de texto tem como única função descobrir se tem um usuário logado ou não.
+    Se ouver, ele vai escrever o id do usuário. Ele é oculto e só existe para que eu
+    possa tirar proveito dessa informação com javascript.
+  -->
+    <input type="text" id="caixa_usuario" value="<?php 
+        if (isset($_SESSION['usuario'])) {
+          echo $_SESSION['usuario'];
+        }
+      ?>" style="visibility: hidden;">
+
+<div class="container">
     <div class="row">
       <div class="col-md-12 text-center">
         <h1>Stellar Delivery 🌠🍰</h1>
@@ -60,6 +72,7 @@ include('php/banco.php');
     ?>
     </div>
   </div>
+  
   
   <!-- Modal Login-->
   
@@ -263,34 +276,47 @@ if(isset($_GET['login'])){
       
       // Ao clicar no botão de comprar, exibir sweet alert dizendo que deu certo
       $('#btn_comprar').click(function() {
-        Swal.fire({
-          title: "Aviso",
-          html: "Transação em andamento...",
-          timer: 2000,
-          timerProgressBar: true,
-          didOpen: () => {
-            Swal.showLoading()
-            const b = Swal.getHtmlContainer().querySelector('b')
-            
-            timerInterval = setInterval(() => {
-              b.textContent = Swal.getTimerLeft()
-              
-            }, 100)
-          },
-          willClose: () => {
-            clearInterval(timerInterval)
-          }
-        }).then((result) => {
-          if (result.dismiss === Swal.DismissReason.timer){
+
+        let usuario = $('#caixa_usuario').val()
+
+        if (usuario != ''){
+
+          
+
             Swal.fire({
-              title: 'Sucesso!',
-              icon: 'success',
-              text: 'O disco voador está a caminho!'
-            })
-            
-            $('#modalProduto').modal('hide')
-          }
-        })
+            title: "Aviso",
+            html: "Transação em andamento...",
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading()
+              const b = Swal.getHtmlContainer().querySelector('b')
+              
+              timerInterval = setInterval(() => {
+                b.textContent = Swal.getTimerLeft()
+                
+              }, 100)
+            },
+            willClose: () => {
+              clearInterval(timerInterval)
+            }
+          }).then((result) => {
+            if (result.dismiss === Swal.DismissReason.timer){
+              Swal.fire({
+                title: 'Sucesso!',
+                icon: 'success',
+                text: 'O disco voador está a caminho!'
+              })
+              
+              $('#modalProduto').modal('hide')
+            }
+          })
+        } else {
+          $('#modalProduto').modal('hide')
+          $('#janelaLogin').modal('show')
+        }
+
+        
       })
       
       // Mostrar perfil
