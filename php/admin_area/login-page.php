@@ -35,6 +35,8 @@ if (isset($_SESSION['login']) && $_SESSION['login'] === 'ok') {
                     <input type="password" class="form-control" name="senha" id="senha" placeholder="Digite sua senha">
                   </div>
                   <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                  <hr>
+                  <a href="../../index.php?abrirLogin=true">Voltar</a>
                 </form>
               </div>
             </div>

@@ -34,6 +34,15 @@ if ($resultado_sql_conta->num_rows == 0) {
 
     $_SESSION['usuario_localizacao'] = $_SESSION['usuario_numero'] . ", " . $_SESSION['usuario_endereco'] . ", " . $_SESSION['usuario_bairro'] . ", " . $_SESSION['usuario_cidade'] . ", " . $_SESSION['usuario_estado'];
 
+    $nome_quebrado = explode(" ", $_SESSION['usuario_nome']);
+
+    $primeiro_nome = $nome_quebrado[0];
+    $segundo_nome = $nome_quebrado[1];
+
+    $nome_reduzido = $primeiro_nome . " " . $segundo_nome;
+
+    $_SESSION['usuario_nome_reduzido'] = $nome_reduzido;
+
     $usuario_logado = $_SESSION['usuario'];
 
     header("Location: home-page.php?login=ok&usuario='$usuario_logado'");
