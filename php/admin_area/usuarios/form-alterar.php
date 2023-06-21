@@ -291,6 +291,7 @@ if (isset($_GET['usuario'])){
           <div class="card-footer">
               <div class="d-flex flex-row-reverse">
                 <button class="btn btn-success" name="btnSalvar" id="btnSalvar" type="submit">Salvar</button>
+                <a class="btn btn-danger mr-1" href="excluir.php?usuario=<?php echo $usuario_id ?>">Excluir</a>
               </div>
             </form>
           </div>

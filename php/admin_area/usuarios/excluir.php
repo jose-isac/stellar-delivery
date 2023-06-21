@@ -1,7 +1,7 @@
 <?php
 include('../../banco.php');
 
-$usuario_id = $_POST['usuario_id'];
+$usuario_id = $_GET['usuario'];
 
 $sql = "DELETE FROM tb_usuarios WHERE usuario_id = '$usuario_id'";
 
