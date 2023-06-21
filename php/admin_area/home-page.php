@@ -61,7 +61,7 @@ include('testasessao.php');
           <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block"><?php echo $_SESSION['usuario_nome']?></a>
+          <a href="#" class="d-block"><?php echo $_SESSION['usuario_nome_reduzido']?></a>
         </div>
       </div>
 
@@ -78,7 +78,7 @@ include('testasessao.php');
               </p>
             </a>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="usuarios/usuarios.php" class="nav-link">
               <i class="nav-icon fa-solid fa-user"></i>
               <p>
                 Usuários
