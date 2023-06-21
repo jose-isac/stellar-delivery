@@ -128,10 +128,10 @@ include('../testasessao.php');
 
             <div class="card-tools">
               <div class="input-group input-group-sm" style="width: 150px;">
-                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                <input type="text" id="caixaPesquisa" name="table_search" class="form-control float-right" placeholder="Search">
 
                 <div class="input-group-append">
-                  <button type="submit" class="btn btn-default">
+                  <button type="submit" id="btnPesquisar" class="btn btn-default">
                     <i class="fas fa-search"></i>
                   </button>
                 </div>
@@ -146,19 +146,11 @@ include('../testasessao.php');
                   <th>ID</th>
                   <th>Nome</th>
                   <th>E-mail</th>
-                  <th>Senha</th>
                   <th>Telefone</th>
-                  <th>Foto</th>
                   <th>CPF</th>
-                  <th>CEP</th>
-                  <th>Estado</th>
-                  <th>Cidade</th>
-                  <th>Bairro</th>
-                  <th>Rua</th>
-                  <th>Número</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="corpo_tabela">
                 
               </tbody>
             </table>
@@ -220,6 +212,22 @@ include('../testasessao.php');
 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../dist/js/pages/dashboard.js"></script>
+
+<script>
+  $(document).ready(function(){
+
+    // Função de pesquisa:
+    $('#btnPesquisar').click(function() {
+      let texto = $('#caixaPesquisa').val()
+      $.post('busca.php', {pesquisa: texto}, function(retorno){
+        if (retorno != '0'){
+          $('#corpo_tabela').html(retorno)
+        }
+      })
+    })
+    
+  })
+</script>
 
 </body>
 </html>
