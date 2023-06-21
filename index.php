@@ -107,7 +107,7 @@ if(isset($_GET['login'])){
                 <a href="registro.php" id="aRegistro">Ainda não tem uma conta?</a>
               </p>
               <p>
-                 <a href="" id="aAdministrador">Sou administrador</a>
+                 <a href="php/admin_area/login-page.php" id="aAdministrador">Sou administrador</a>
               </p>
               
           </div>

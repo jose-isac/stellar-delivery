@@ -104,7 +104,7 @@
             <a href="index.php?abrirLogin=true" id="aLogin">Já tem uma conta?</a>
           </p>
           <p>
-            <a href="#" id="a_Mrg_Administrador">Sou administrador</a>
+            <a href="php/admin_area/login-page.php" id="a_Mrg_Administrador">Sou administrador</a>
           </p>
         </div>
       </div>
