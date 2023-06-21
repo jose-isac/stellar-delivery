@@ -28,6 +28,7 @@ include('../testasessao.php');
   <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.min.css">
+  <link rel="shortcut icon" href="../../../favicon.svg" type="image/svg">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -48,7 +49,7 @@ include('../testasessao.php');
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="../home-page.php" class="brand-link">
-      <img src="../dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="../../../favicon.svg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Stellar Delivery</span>
     </a>
 
@@ -76,6 +77,15 @@ include('../testasessao.php');
                 Tela inicial
               </p>
             </a>
+          </li>
+          <li class="nav-item">
+            <a href="../../../index.php" class="nav-link">
+              <i class="nav-icon fa-solid fa-mitten"></i>
+              <p>
+                Área do Cliente
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="#" class="nav-link active">
               <i class="nav-icon fa-solid fa-user"></i>
