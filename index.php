@@ -32,10 +32,10 @@ include('php/banco.php');
       </div>
     </div>
     <div class="row">
-      <div class="col-md-8 my-3">
+      <div class="col-md-10 my-3">
         <input class="form-control" type="text" name="" placeholder="O que você deseja?" id="caixa_pesquisa">
       </div>
-      <div class="d-flex flex-row-reverse col-md-4 my-3">
+      <div class="d-flex flex-row-reverse col-md-2 my-3">
         <?php
           if(isset($_SESSION['login'])){
             echo '<button class="btn btn-outline-secondary" id="btnPerfil">Meu perfil</button>';
