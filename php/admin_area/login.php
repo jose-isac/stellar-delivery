@@ -1,15 +1,19 @@
 <?php
-include('banco.php');
+include('../banco.php');
 
-$usuario_email = $_POST['usuario_email'];
-$usuario_senha = $_POST['usuario_senha'];
+$email = $_POST['email'];
+$senha = $_POST['senha'];
 
-$sql = "SELECT * FROM tb_usuarios WHERE usuario_email = '$usuario_email' AND usuario_senha = '$usuario_senha'";
+// Testar se a conta existe
 
-$resultado = $conexao_banco->query($sql);
+$sql_conta = "SELECT * FROM tb_usuarios WHERE usuario_email = '$email' AND usuario_senha = '$senha' AND usuario_adm = 'S'";
+$resultado_sql_conta = $conexao_banco->query($sql_conta);
 
-if($resultado->num_rows > 0){
-    $linha_tabela = $resultado->fetch_array(MYSQLI_ASSOC);
+if ($resultado_sql_conta->num_rows == 0) {
+    header("Location: login-page.php?erro=conta-nao-encontrada");
+    exit;
+} else {
+    $linha_tabela = $resultado_sql_conta->fetch_array(MYSQLI_ASSOC);
     session_start();
     $_SESSION['login'] = 'ok';
     $_SESSION['usuario'] = $linha_tabela['usuario_id'];
@@ -32,10 +36,8 @@ if($resultado->num_rows > 0){
 
     $usuario_logado = $_SESSION['usuario'];
 
-    header("Location: ../index.php?login=ok&usuario='$usuario_logado'");
-    exit;
-}else {
-    header("Location: ../index.php?login=erro");
-    exit;
+    header("Location: home-page.php?login=ok&usuario='$usuario_logado'");
 }
+
+
 ?>

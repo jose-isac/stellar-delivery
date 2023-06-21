@@ -197,6 +197,14 @@ if(isset($_GET['login'])){
           </div>
         </div>
         <div class="modal-footer">
+          <?php 
+            if (isset($_SESSION['usuario_adm'])) {
+              if ($_SESSION['usuario_adm'] === 'S') {
+                $usuario_logado = $_SESSION['usuario'];
+                echo '<a class="btn btn-outline-info" href="php/admin_area/home-page.php?login=ok&usuario='.$usuario_logado.'"> Área Restrita</a>';
+              }
+            }
+          ?>
           <a href="php/sair.php" class="btn btn-outline-danger" id="btnLogout">Sair</a>
           <a href="alterarPerfil.php" class="btn btn-warning" id="aUsuarioAlterar">Ver mais informações e alterar</a>
           <button type="submit" class="btn btn-primary" id="btn_fechar">Fechar</button>
