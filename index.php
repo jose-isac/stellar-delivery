@@ -43,7 +43,7 @@ include('php/banco.php');
             echo '<button class="btn btn-outline-success mr-3" id="btnLogin">Login</button>';
           }
         ?>
-        <button class="btn btn-outline-primary mr-3" id="btnPesquisar" type="submit">Pesquisar</button>
+        <!--<button class="btn btn-outline-primary mr-3" id="btnPesquisar" type="submit">Pesquisar</button> -->
       </div>
     </div>
   </div>
@@ -373,7 +373,7 @@ if(isset($_GET['login'])){
 
       //Função para realizar a pesquisa
 
-      $('#btnPesquisar').click(function() {
+      $('#caixa_pesquisa').keyup(function() {
         let texto = $('#caixa_pesquisa').val()
         
         $.post('php/busca.php', {pesquisa: texto}, function(retorno){
