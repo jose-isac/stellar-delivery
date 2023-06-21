@@ -82,7 +82,7 @@ if (isset($_FILES["fotoPerfil"]) && $_FILES["fotoPerfil"]["error"] == 0) {
 
 } else {
 
-    $sql = "UPDATE tb_usuarios SET usuario_nome = '$usuario_nome', usuario_email = '$usuario_email', usuario_senha = '$usuario_senha', usuario_telefone = '$usuario_telefone', usuario_cpf = '$usuario_cpf', usuario_cep = '$usuario_cep', usuario_estado = '$usuario_estado', usuario_cidade = '$usuario_cidade', usuario_bairro = '$usuario_bairro', usuario_rua = '$usuario_endereco', usuario_numero = '$usuario_numero', usuario_complemento = '$usuario_complemento' WHERE usuario_id = '$usuario_id'";
+    $sql = "UPDATE tb_usuarios SET usuario_nome = '$usuario_nome', usuario_email = '$usuario_email', usuario_senha = '$usuario_senha', usuario_telefone = '$usuario_telefone', usuario_cpf = '$usuario_cpf', usuario_cep = '$usuario_cep', usuario_estado = '$usuario_estado', usuario_cidade = '$usuario_cidade', usuario_bairro = '$usuario_bairro', usuario_rua = '$usuario_endereco', usuario_numero = '$usuario_numero', usuario_complemento = '$usuario_complemento', usuario_adm = '$usuario_adm' WHERE usuario_id = '$usuario_id'";
 
     $resultado = $conexao_banco->query($sql);
 
