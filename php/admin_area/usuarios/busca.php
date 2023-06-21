@@ -18,6 +18,9 @@ if ($resultado) {
                     <td>'.$linha['usuario_email'].'</td>
                     <td>'.$linha['usuario_telefone'].'</td>
                     <td>'.$linha['usuario_cpf'].'</td>
+                    <td>
+                        <a class="btn btn-warning" href="form-alterar.php?usuario='.$linha['usuario_id'].'"><i class="fa-solid fa-pencil"></i></a>
+                    </td>
 
                 </tr>
             ';

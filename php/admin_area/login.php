@@ -41,7 +41,7 @@ if ($resultado_sql_conta->num_rows == 0) {
 
     $nome_reduzido = $primeiro_nome . " " . $segundo_nome;
 
-    $_SESSION['usuario_nome_reduzido'] = $nome_reduzido;
+    $_SESSION['usuario_reduzido'] = $nome_reduzido;
 
     $usuario_logado = $_SESSION['usuario'];
 

@@ -32,6 +32,15 @@ if($resultado->num_rows > 0){
 
     $usuario_logado = $_SESSION['usuario'];
 
+    $nome_quebrado = explode(" ", $_SESSION['usuario_nome']);
+
+    $primeiro_nome = $nome_quebrado[0];
+    $segundo_nome = $nome_quebrado[1];
+
+    $nome_reduzido = $primeiro_nome . " " . $segundo_nome;
+
+    $_SESSION['usuario_reduzido'] = $nome_reduzido;
+
     header("Location: ../index.php?login=ok&usuario='$usuario_logado'");
     exit;
 }else {
