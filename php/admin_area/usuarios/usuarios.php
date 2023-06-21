@@ -48,7 +48,7 @@ include('../testasessao.php');
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../home-page.php" class="brand-link">
+    <a href="#" class="brand-link">
       <img src="../../../favicon.svg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Stellar Delivery</span>
     </a>
