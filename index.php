@@ -207,10 +207,11 @@ if(isset($_GET['login'])){
   
   <!-- Fim do modal perfil -->
   
-  
-  <script src="js/bootstrap.bundle.js"></script>
   <script src="js/jquery3.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="js/bootstrap.bundle.js"></script>
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
   <script>
     $(document).ready(function() {
 

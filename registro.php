@@ -112,6 +112,7 @@
 
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/jquery3.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="js/validacpf.js"></script>
 <script src="js/validarTelefone.js"></script>
@@ -140,6 +141,35 @@
         $('#cpf_error_message').css('visibility', 'visible')
       }
     })
+
+    function mensagemErro() {
+      let urlParams = new URLSearchParams(window.location.search)
+      let erro = urlParams.get('erro')
+
+      if (erro === "cpf-e-email-ja-cadastrados") {
+        Swal.fire({
+          title: "Erro!",
+          icon: "error",
+          text: "Um usuário com este mesmo e-mail e CPF já foi cadastrado! Tente novamente com outras credenciais."
+        })
+      } 
+      else if (erro === "cpf-ja-cadastrado") {
+        Swal.fire({
+          title: "Erro!",
+          icon: "error",
+          text: "Um usuário com este mesmo CPF já foi cadastrado! Tente novamente com outra credencial."
+        })
+      }
+      else if (erro === "email-ja-cadastrado") {
+        Swal.fire({
+          title: "Erro!",
+          icon: "error",
+          text: "Um usuário com este mesmo endereço de e-mail já foi cadastrado! Tente novamente com outro endereço."
+        })
+      }
+    }
+
+    mensagemErro()
 
        
     // Função para mandar para a página index.html e abrir o modal de login
