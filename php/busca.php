@@ -11,8 +11,9 @@ if ($resultado){
         while($linha = $resultado->fetch_array(MYSQLI_ASSOC)){
 
             echo '<div class="col-md-4 my-3">
-                    <div class="card" data-alimentoid = "'.$linha['alimento_id'].'" id="'.$linha['alimento_nome'].'" data-descricao= "'.$linha['alimento_descricao'].'" data-categoria="'.$linha['alimento_categoria'].'" data-preco="'.$linha['alimento_preco'].'" data-disponivel="'.$linha['alimento_disponivel'].'">
-                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 1">
+                    <div class="card" data-alimentoid = "'.$linha['alimento_id'].'" id="'.$linha['alimento_nome'].'" data-descricao= "'.$linha['alimento_descricao'].'" data-categoria="'.$linha['alimento_categoria'].'" data-preco="'.$linha['alimento_preco'].'" data-disponivel="'.$linha['alimento_disponivel'].'"
+                    data-alimento-imagem="'.$linha['alimento_imagem'].'">
+                    <img style="width: 348px; height: 348px;" src="php/food_images/'.$linha['alimento_imagem'].'" class="card-img-top" alt="Produto 1">
                     <div class="card-body">
                         <h5 class="card-title">'.$linha['alimento_nome'].'</h5>
                         <p class="card-text">'.$linha['alimento_descricao'].'</p>

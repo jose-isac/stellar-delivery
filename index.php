@@ -59,8 +59,8 @@ include('php/banco.php');
           while ($linha = $resultado->fetch_array(MYSQLI_ASSOC)){
             echo 
                   '<div class="col-md-4 my-3">
-                    <div class="card" data-alimentoid = "'.$linha['alimento_id'].'" id="'.$linha['alimento_nome'].'" data-descricao= "'.$linha['alimento_descricao'].'" data-categoria="'.$linha['alimento_categoria'].'" data-preco="'.$linha['alimento_preco'].'" data-disponivel="'.$linha['alimento_disponivel'].'">
-                      <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 1">
+                    <div class="card" data-alimentoid = "'.$linha['alimento_id'].'" id="'.$linha['alimento_nome'].'" data-descricao= "'.$linha['alimento_descricao'].'" data-categoria="'.$linha['alimento_categoria'].'" data-preco="'.$linha['alimento_preco'].'" data-disponivel="'.$linha['alimento_disponivel'].'" data-alimento-imagem="'.$linha['alimento_imagem'].'">
+                      <img style="width: 348px; height: 348px;" src="php/food_images/'.$linha['alimento_imagem'].'" class="card-img-top" alt="Produto 1">
                       <div class="card-body">
                         <h5 class="card-title">'.$linha['alimento_nome'].'</h5>
                         <p class="card-text">'.$linha['alimento_descricao'].'</p>
@@ -137,7 +137,7 @@ if(isset($_GET['login'])){
             <div class="row">
               <div class="col-md-4">
                 <div class="thumbnail">
-                  <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 6">
+                  <img style="width: 225.23px; height: 225.23px;" id="produto_imagem" src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 6">
                 </div>
               </div>
               <div class="col-md-8">
@@ -266,12 +266,14 @@ if(isset($_GET['login'])){
         let preco = $(this).attr('data-preco')
         let disponivel = $(this).attr('data-disponivel')
         let id = $(this).attr('data-alimentoid')
+        let imagem = $(this).attr('data-alimento-imagem')
         
         $('#produto_id').text(id)
         $('#produto_titulo').text(titulo)
         $('#produto_descricao').text(descricao)
         $('#produto_preco').text('R$ ' + preco)
         $('#produto_categoria').text(categoria)
+        $('#produto_imagem').attr('src', 'php/food_images/' + imagem)
 
         // Se não tiver mais disponivel, ele oculta os botoes.
         if (disponivel <= 0){
