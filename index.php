@@ -28,7 +28,7 @@ include('php/banco.php');
 <div class="container">
     <div class="row">
       <div class="col-md-12 text-center">
-        <h1>Stellar Delivery 🌠🍰</h1>
+        <h1>🛸 Stellar Delivery 🌠🍰</h1>
       </div>
     </div>
     <div class="row">
