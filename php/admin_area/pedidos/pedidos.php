@@ -2,7 +2,7 @@
 include('../testasessao.php');
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -141,7 +141,67 @@ include('../testasessao.php');
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        
+      <div class="card">
+            <div class="card-header">
+
+              <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" id="caixaPesquisa" name="table_search" class="form-control float-right" placeholder="Search">
+
+                  <div class="input-group-append">
+                    <button type="submit" id="btnPesquisar" class="btn btn-default">
+                      <i class="fas fa-search"></i>
+                    </button>
+                    <a class="btn btn-success" href="form-adicionar.php"><i class="fa-solid fa-plus"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover text-nowrap">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Usuário</th>
+                    <th>Alimento</th>
+                    <th>Quantidade</th>
+                    <th>Hora</th>
+                    <th>Valor</th>
+                    <th>Opções</th>
+                  </tr>
+                </thead>
+                <tbody id="corpo_tabela">
+                  <?php 
+                    include('../../banco.php');
+                    $sql = "SELECT * FROM vw_pedidos";
+                    $resultado = $conexao_banco->query($sql);
+                    if ($resultado) {
+                      if ($resultado->num_rows > 0) {
+                        while ($linha=$resultado->fetch_array(MYSQLI_ASSOC)){
+                          echo '
+                            <tr>
+                                <td>'.$linha['pedido_id'].'</td>
+                                <td>'.$linha['usuario_nome'].'</td>
+                                <td>'.$linha['alimento_nome'].'</td>
+                                <td>'.$linha['pedido_alimento_quantidade'].'</td>
+                                <td>'.$linha['pedido_hora'].'</td>
+                                <td>R$ '.$linha['pedido_valor'].'</td>
+                                <td>
+                                    <a class="btn btn-warning" href="form-alterar.php?pedido='.$linha['pedido_id'].'"><i class="fa-solid fa-pencil"></i></a>
+                                </td>
+
+                            </tr>
+                        ';
+                        }
+                      }
+                    }
+                  ?>
+                </tbody>
+              </table>
+            </div>
+          <!-- /.card-body -->
+        </div>
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
@@ -194,8 +254,43 @@ include('../testasessao.php');
 <!-- AdminLTE App -->
 <script src="../dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../dist/js/demo.js"></script>
+
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../dist/js/pages/dashboard.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  $(document).ready(function(){
+    function sweetAlerts() {
+      let urlParams = new URLSearchParams(window.location.search)
+      let aviso = urlParams.get('excluir')
+
+      if (aviso === 'ok'){
+        Swal.fire({
+          title: "Sucesso!",
+          icon: "success",
+          text: "Pedido excluido com sucesso."
+        })
+      } else if (aviso === 'erro') {
+        Swal.fire({
+          title: "Erro!",
+          icon: "error",
+          text: "Erro ao excluir pedido."
+        })
+      }
+    }
+
+    sweetAlerts()
+
+    $('#btnPesquisar').click(function() {
+      let texto = $('#caixaPesquisa').val()
+      $.post('busca.php', {pesquisa: texto}, function(retorno){
+        if (retorno != '0'){
+          $('#corpo_tabela').html(retorno)
+        }
+      })
+    })
+  })
+</script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 include('../testasessao.php');
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -141,69 +141,69 @@ include('../testasessao.php');
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-      <div class="card">
-          <div class="card-header">
+        <div class="card">
+            <div class="card-header">
 
-            <div class="card-tools">
-              <div class="input-group input-group-sm" style="width: 150px;">
-                <input type="text" id="caixaPesquisa" name="table_search" class="form-control float-right" placeholder="Search">
+              <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" id="caixaPesquisa" name="table_search" class="form-control float-right" placeholder="Search">
 
-                <div class="input-group-append">
-                  <button type="submit" id="btnPesquisar" class="btn btn-default">
-                    <i class="fas fa-search"></i>
-                  </button>
-                  <a class="btn btn-success" href="form-adicionar.php"><i class="fa-solid fa-plus"></i></a>
+                  <div class="input-group-append">
+                    <button type="submit" id="btnPesquisar" class="btn btn-default">
+                      <i class="fas fa-search"></i>
+                    </button>
+                    <a class="btn btn-success" href="form-adicionar.php"><i class="fa-solid fa-plus"></i></a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <!-- /.card-header -->
-          <div class="card-body table-responsive p-0">
-            <table class="table table-hover text-nowrap">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nome</th>
-                  <th>Categoria</th>
-                  <th>Descrição</th>
-                  <th>Imagem</th>
-                  <th>Preço</th>
-                  <th>Quantidade Disponível</th>
-                  <th>Destaque?</th>
-                  <th>Opções</th>
-                </tr>
-              </thead>
-              <tbody id="corpo_tabela">
-                <?php 
-                  include('../../banco.php');
-                  $sql = "SELECT * FROM tb_alimentos";
-                  $resultado = $conexao_banco->query($sql);
-                  if ($resultado) {
-                    if ($resultado->num_rows > 0) {
-                      while ($linha=$resultado->fetch_array(MYSQLI_ASSOC)){
-                        echo '
-                          <tr>
-                              <td>'.$linha['alimento_id'].'</td>
-                              <td>'.$linha['alimento_nome'].'</td>
-                              <td>'.$linha['alimento_categoria'].'</td>
-                              <td>'.$linha['alimento_descricao'].'</td>
-                              <td>'.$linha['alimento_imagem'].'</td>
-                              <td>R$ '.$linha['alimento_preco'].'</td>
-                              <td>'.$linha['alimento_disponivel'].'</td>
-                              <td>'.$linha['alimento_destaque'].'</td>
-                              <td>
-                                  <a class="btn btn-warning" href="form-alterar.php?alimento='.$linha['alimento_id'].'"><i class="fa-solid fa-pencil"></i></a>
-                              </td>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+              <table class="table table-hover text-nowrap">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Categoria</th>
+                    <th>Descrição</th>
+                    <th>Imagem</th>
+                    <th>Preço</th>
+                    <th>Quantidade Disponível</th>
+                    <th>Destaque?</th>
+                    <th>Opções</th>
+                  </tr>
+                </thead>
+                <tbody id="corpo_tabela">
+                  <?php 
+                    include('../../banco.php');
+                    $sql = "SELECT * FROM tb_alimentos";
+                    $resultado = $conexao_banco->query($sql);
+                    if ($resultado) {
+                      if ($resultado->num_rows > 0) {
+                        while ($linha=$resultado->fetch_array(MYSQLI_ASSOC)){
+                          echo '
+                            <tr>
+                                <td>'.$linha['alimento_id'].'</td>
+                                <td>'.$linha['alimento_nome'].'</td>
+                                <td>'.$linha['alimento_categoria'].'</td>
+                                <td>'.$linha['alimento_descricao'].'</td>
+                                <td>'.$linha['alimento_imagem'].'</td>
+                                <td>R$ '.$linha['alimento_preco'].'</td>
+                                <td>'.$linha['alimento_disponivel'].'</td>
+                                <td>'.$linha['alimento_destaque'].'</td>
+                                <td>
+                                    <a class="btn btn-warning" href="form-alterar.php?alimento='.$linha['alimento_id'].'"><i class="fa-solid fa-pencil"></i></a>
+                                </td>
 
-                          </tr>
-                      ';
+                            </tr>
+                        ';
+                        }
                       }
                     }
-                  }
-                ?>
-              </tbody>
-            </table>
-          </div>
+                  ?>
+                </tbody>
+              </table>
+            </div>
           <!-- /.card-body -->
         </div>
       </div><!-- /.container-fluid -->

@@ -145,7 +145,7 @@ if(isset($_GET['login'])){
                 <ul style="list-style-type: none;">
                   <li><strong>Categoria: </strong><span id="produto_categoria"></span></li>
                   <li><strong>Descrição: </strong><span id="produto_descricao"></span></li>
-                  <li><strong>Preço: </strong><span id="produto_preco"></span></li>
+                  <li><strong>Preço: R$ </strong><span id="produto_preco"></span></li>
                   <li><strong>Quantidade disponível: </strong><span id="produto_disponivel"></span></li>
                   <li><strong>Quantidade desejada:</strong></li>
                   <li class="mt-2"><input class="form-control" type="range" name="compra_qntd" id="compra_qntd" min="1" max=""><span id="mostrador"></span></li>
@@ -271,7 +271,7 @@ if(isset($_GET['login'])){
         $('#produto_id').text(id)
         $('#produto_titulo').text(titulo)
         $('#produto_descricao').text(descricao)
-        $('#produto_preco').text('R$ ' + preco)
+        $('#produto_preco').text(preco)
         $('#produto_categoria').text(categoria)
         $('#produto_imagem').attr('src', 'php/food_images/' + imagem)
 
@@ -318,10 +318,12 @@ if(isset($_GET['login'])){
         let quantidade = $('#compra_qntd').val()
         let dataAtual = new Date();
         let horarioAtual = dataAtual.getHours() + ':' + dataAtual.getMinutes() + ':' + dataAtual.getSeconds();
+        let preco = $('#produto_preco').text()
+        let total = quantidade * preco
 
         if (usuario != ''){
 
-          $.post('php/novopedido.php', {usuario_id: usuario, alimento_id: alimento, alimento_quantidade: quantidade, pedido_hora: horarioAtual}, function(retorno){
+          $.post('php/novopedido.php', {usuario_id: usuario, alimento_id: alimento, alimento_quantidade: quantidade, pedido_hora: horarioAtual, pedido_valor: total}, function(retorno){
 
               if (retorno === 'certo'){
                       Swal.fire({
@@ -350,8 +352,13 @@ if(isset($_GET['login'])){
                         })
                         
                         $('#modalProduto').modal('hide')
+
+                        setTimeout(function() {location.reload();}, 5000)
                       }
                     })
+
+                    
+
                 } else {
                   Swal.fire({
                     icon: 'error',
