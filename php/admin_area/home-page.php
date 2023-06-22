@@ -132,7 +132,7 @@ include('testasessao.php');
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Tela inicial</h1>
+            <h1 class="m-0">Área Restrita</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -144,7 +144,7 @@ include('testasessao.php');
       <div class="container-fluid">
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Seja bem-vindo, <?php echo $_SESSION['usuario_reduzido'] ?>!</h3>
+          <h3 class="card-title">Seja bem-vindo, administrador <?php echo $_SESSION['usuario_reduzido'] ?>!</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">

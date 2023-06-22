@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 21-Jun-2023 às 23:02
+-- Tempo de geração: 22-Jun-2023 às 19:46
 -- Versão do servidor: 10.4.28-MariaDB
 -- versão do PHP: 8.2.4
 
@@ -32,7 +32,7 @@ CREATE TABLE `tb_alimentos` (
   `alimento_nome` varchar(30) NOT NULL,
   `alimento_categoria` varchar(20) NOT NULL,
   `alimento_descricao` varchar(60) NOT NULL,
-  `alimento_imagem` varchar(90) DEFAULT NULL,
+  `alimento_imagem` varchar(90) DEFAULT 'defaultfood.png',
   `alimento_preco` double(9,2) NOT NULL,
   `alimento_disponivel` int(11) NOT NULL,
   `alimento_destaque` char(1) NOT NULL
@@ -43,10 +43,11 @@ CREATE TABLE `tb_alimentos` (
 --
 
 INSERT INTO `tb_alimentos` (`alimento_id`, `alimento_nome`, `alimento_categoria`, `alimento_descricao`, `alimento_imagem`, `alimento_preco`, `alimento_disponivel`, `alimento_destaque`) VALUES
-(1, 'Bolo de chocolate', 'Doce', 'Bolo feito pela Rita', NULL, 10.00, 0, 'S'),
-(2, 'Bolo de baunilha', 'Doce', 'Bolo de baunilha feito por mim', NULL, 10.00, 15, 'S'),
-(3, 'Hamburguer', 'Salgado', 'Muitas calorias', NULL, 24.00, 7, 'S'),
-(4, 'Torta de Morango', 'Doce', 'Feito pela vovozinha do Rogerio', NULL, 23.00, 2, 'S');
+(1, 'Bolo de morango', 'Doce', 'Delicioso bolo de morango. 10 pedaços.', 'bolodemorango.webp', 12.00, 30, 'S'),
+(2, 'Bolo de baunilha', 'Doce', 'Delicioso bolo de baunilha.\r\n9 pedaços.', 'bolo-de-baunilha.jpeg', 10.00, 15, 'S'),
+(4, 'Torta de Morango', 'Doce', 'Deliciosa torta de morango. \r\n10 pedaços.', 'strawberrypie.jpeg', 23.00, 2, 'S'),
+(5, 'Coca-Cola Zero Açucar', 'Bebida', '355ml', 'cocacolazerosugar.jpg', 6.00, 55, 'S'),
+(6, 'Coca-Cola', 'Bebida', '237ml', 'cocacola.jpg', 11.00, 45, 'S');
 
 -- --------------------------------------------------------
 
@@ -58,20 +59,20 @@ CREATE TABLE `tb_pedidos` (
   `pedido_id` int(10) UNSIGNED NOT NULL,
   `pedido_usuario_id` int(10) UNSIGNED NOT NULL,
   `pedido_alimento_id` int(10) UNSIGNED NOT NULL,
-  `pedido_alimento_quantidade` int(11) NOT NULL
+  `pedido_alimento_quantidade` int(11) NOT NULL,
+  `pedido_hora` time NOT NULL,
+  `pedido_valor` double(9,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Extraindo dados da tabela `tb_pedidos`
---
-
-INSERT INTO `tb_pedidos` (`pedido_id`, `pedido_usuario_id`, `pedido_alimento_id`, `pedido_alimento_quantidade`) VALUES
-(2, 20, 1, 10),
-(3, 20, 1, 10);
 
 --
 -- Acionadores `tb_pedidos`
 --
+DELIMITER $$
+CREATE TRIGGER `aumentar_quantidade_disponivel` AFTER DELETE ON `tb_pedidos` FOR EACH ROW BEGIN
+	UPDATE tb_alimentos SET alimento_disponivel = alimento_disponivel + OLD.pedido_alimento_quantidade WHERE alimento_id = OLD.pedido_alimento_id;
+END
+$$
+DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `reduzir_quantidade_disponivel` AFTER INSERT ON `tb_pedidos` FOR EACH ROW BEGIN
 	UPDATE tb_alimentos SET alimento_disponivel = alimento_disponivel - NEW.pedido_alimento_quantidade WHERE alimento_id = NEW.pedido_alimento_id;
@@ -108,10 +109,31 @@ CREATE TABLE `tb_usuarios` (
 --
 
 INSERT INTO `tb_usuarios` (`usuario_id`, `usuario_nome`, `usuario_email`, `usuario_senha`, `usuario_telefone`, `usuario_foto`, `usuario_cpf`, `usuario_cep`, `usuario_estado`, `usuario_cidade`, `usuario_bairro`, `usuario_rua`, `usuario_numero`, `usuario_complemento`, `usuario_adm`) VALUES
-(22, 'DOM JUAN', 'domjuam@email.com', '1234', '88994233421', 'juan.jpg', '70971488533', '62031185', 'AM', 'SOBRAL', 'CIDADE DR. JOSE EUCLIDES FERREIRA GOMES JUNIOR', 'RUA DOUTOR TOMAS ARAGAO', '585', 'NA MINHA CASA', 'S'),
-(24, 'Fenimore Rasquirrel Cold Gray', 'rasquirrel@adm.com', '1234', '88994925975', 'rasquirrel.jpg', '50159598508', '62031185', 'CE', 'Sobral', 'Bobos', 'Minha casa', '122', 'Invisivel', 'S'),
-(25, 'SEU PEDRO', 'seupedro@email.com', '1234', '11942321392', 'defaultuser.png', '56934299035', '62031185', 'CE', 'Sobral', 'Cidade Dr. José Euclides Ferreira Gomes Júnior', 'Rua Doutor Tomás Aragão', '123', 'ASDASDasd', 'N'),
-(26, 'Dona Maria', 'donamaria@email.com', '1234', '12312312445', 'donamaria.jfif', '80737721081', '62031185', 'CE', 'Sobral', 'Cidade Dr. José Euclides Ferreira Gomes Júnior', 'Rua Doutor Tomás Aragão', '543', 'Dentro de um buraco', 'S');
+(27, 'José Isac Araújo Monção', 'joseisac4500@gmail.com', '1234', '88994925975', 'isac.jfif', '10970299303', '62031185', 'CE', 'Sobral', 'Cidade Dr. José Euclides Ferreira Gomes Júnior', 'Rua Doutor Tomás Aragão', '585', 'Perto da Igreja.', 'S');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura stand-in para vista `vw_pedidos`
+-- (Veja abaixo para a view atual)
+--
+CREATE TABLE `vw_pedidos` (
+`pedido_id` int(10) unsigned
+,`usuario_nome` varchar(60)
+,`alimento_nome` varchar(30)
+,`pedido_alimento_quantidade` int(11)
+,`pedido_hora` time
+,`pedido_valor` double(9,2)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para vista `vw_pedidos`
+--
+DROP TABLE IF EXISTS `vw_pedidos`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vw_pedidos`  AS SELECT `tb_pedidos`.`pedido_id` AS `pedido_id`, `tb_usuarios`.`usuario_nome` AS `usuario_nome`, `tb_alimentos`.`alimento_nome` AS `alimento_nome`, `tb_pedidos`.`pedido_alimento_quantidade` AS `pedido_alimento_quantidade`, `tb_pedidos`.`pedido_hora` AS `pedido_hora`, `tb_pedidos`.`pedido_valor` AS `pedido_valor` FROM ((`tb_pedidos` join `tb_usuarios` on(`tb_pedidos`.`pedido_usuario_id` = `tb_usuarios`.`usuario_id`)) join `tb_alimentos` on(`tb_pedidos`.`pedido_alimento_id` = `tb_alimentos`.`alimento_id`)) ;
 
 --
 -- Índices para tabelas despejadas
@@ -144,19 +166,19 @@ ALTER TABLE `tb_usuarios`
 -- AUTO_INCREMENT de tabela `tb_alimentos`
 --
 ALTER TABLE `tb_alimentos`
-  MODIFY `alimento_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `alimento_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `tb_pedidos`
 --
 ALTER TABLE `tb_pedidos`
-  MODIFY `pedido_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `pedido_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `tb_usuarios`
 --
 ALTER TABLE `tb_usuarios`
-  MODIFY `usuario_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `usuario_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
