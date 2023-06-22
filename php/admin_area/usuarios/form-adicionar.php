@@ -88,7 +88,7 @@ include('../../banco.php');
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link active">
+            <a href="usuarios.php" class="nav-link active">
               <i class="nav-icon fa-solid fa-user"></i>
               <p>
                 Usuários
@@ -96,14 +96,14 @@ include('../../banco.php');
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="../alimentos/alimentos.php" class="nav-link">
               <i class="nav-icon fa-solid fa-burger"></i>
               <p>
                 Alimentos
               </p>
             </a>
           </li><li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="../pedidos/pedidos.php" class="nav-link">
               <i class="nav-icon fa-solid fa-clipboard"></i>
               <p>
                 Pedidos

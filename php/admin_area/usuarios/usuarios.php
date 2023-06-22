@@ -95,14 +95,14 @@ include('../testasessao.php');
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="../alimentos/alimentos.php" class="nav-link">
               <i class="nav-icon fa-solid fa-burger"></i>
               <p>
                 Alimentos
               </p>
             </a>
           </li><li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="../pedidos/pedidos.php" class="nav-link">
               <i class="nav-icon fa-solid fa-clipboard"></i>
               <p>
                 Pedidos
