@@ -261,8 +261,31 @@ include('../testasessao.php');
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../dist/js/pages/dashboard.js"></script>
 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
   $(document).ready(function(){
+    function sweetAlerts() {
+      let urlParams = new URLSearchParams(window.location.search)
+      let aviso = urlParams.get('excluir')
+
+      if (aviso === 'ok'){
+        Swal.fire({
+          title: "Sucesso!",
+          icon: "success",
+          text: "Alimento excluido com sucesso."
+        })
+      } else if (aviso === 'erro') {
+        Swal.fire({
+          title: "Erro!",
+          icon: "error",
+          text: "Erro ao excluir alimento."
+        })
+      }
+    }
+
+    sweetAlerts()
+
     $('#btnPesquisar').click(function() {
       let texto = $('#caixaPesquisa').val()
       $.post('busca.php', {pesquisa: texto}, function(retorno){
