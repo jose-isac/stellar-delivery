@@ -12,14 +12,20 @@ Para reproduzir a execução da maneira que ele foi desenvolvido, você deve:
 * Acessar o localhost, e clicar na pasta que você criou de acordo com as instruções do primeiro item desta lista.
 ## Screenshots(22/06):
 
-![image](https://github.com/Rasquirrel/stellar-delivery/assets/96674887/a522e5eb-4f0e-4fae-af9d-93b4fdba1efb)
+![image](https://github.com/Rasquirrel/stellar-delivery/assets/96674887/ebb28ca7-b4a0-4158-a346-38f39ac7d2cd)
 
-![image](https://github.com/Rasquirrel/stellar-delivery/assets/96674887/bf3065be-3763-471d-be43-c357133d7875)
+![image](https://github.com/Rasquirrel/stellar-delivery/assets/96674887/ca897a78-a23f-48ae-bce2-955bea5ff8f8)
 
-![image](https://github.com/Rasquirrel/stellar-delivery/assets/96674887/9f7ed901-a37b-45f6-b4e2-1f8b6b82d7c5)
 
-![image](https://github.com/Rasquirrel/stellar-delivery/assets/96674887/1c1437e2-e438-46fd-8ee8-50b37c6d9cb2)
+![image](https://github.com/Rasquirrel/stellar-delivery/assets/96674887/e512eb13-3e52-45c1-a5ec-9fe3f84cc850)
 
-![image](https://github.com/Rasquirrel/stellar-delivery/assets/96674887/9dd3682e-1858-4a84-9a97-bd47258eada7)
+![image](https://github.com/Rasquirrel/stellar-delivery/assets/96674887/8b0f8791-97c9-403d-8a4b-148d1dc8759e)
 
-![image](https://github.com/Rasquirrel/stellar-delivery/assets/96674887/b5becb24-56f1-4db6-8342-c3c2e47aa3e3)
+![image](https://github.com/Rasquirrel/stellar-delivery/assets/96674887/30f9c739-eab3-479a-8cc9-e93b680552bf)
+
+![image](https://github.com/Rasquirrel/stellar-delivery/assets/96674887/91351706-74eb-49a7-8244-f1a5789213ac)
+
+![image](https://github.com/Rasquirrel/stellar-delivery/assets/96674887/7739c515-ebbf-4038-a84d-fb40e0e067df)
+
+
+
