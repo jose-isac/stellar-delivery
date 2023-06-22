@@ -316,10 +316,12 @@ if(isset($_GET['login'])){
         let usuario = $('#caixa_usuario').val()
         let alimento = $('#produto_id').text()
         let quantidade = $('#compra_qntd').val()
+        let dataAtual = new Date();
+        let horarioAtual = dataAtual.getHours() + ':' + dataAtual.getMinutes() + ':' + dataAtual.getSeconds();
 
         if (usuario != ''){
 
-          $.post('php/novopedido.php', {usuario_id: usuario, alimento_id: alimento, alimento_quantidade: quantidade}, function(retorno){
+          $.post('php/novopedido.php', {usuario_id: usuario, alimento_id: alimento, alimento_quantidade: quantidade, pedido_hora: horarioAtual}, function(retorno){
 
               if (retorno === 'certo'){
                       Swal.fire({
