@@ -258,8 +258,20 @@ include('../testasessao.php');
 <!-- AdminLTE App -->
 <script src="../dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../dist/js/pages/dashboard.js"></script>
+
+<script>
+  $(document).ready(function(){
+    $('#btnPesquisar').click(function() {
+      let texto = $('#caixaPesquisa').val()
+      $.post('busca.php', {pesquisa: texto}, function(retorno){
+        if (retorno != '0'){
+          $('#corpo_tabela').html(retorno)
+        }
+      })
+    })
+  })
+</script>
 </body>
 </html>
