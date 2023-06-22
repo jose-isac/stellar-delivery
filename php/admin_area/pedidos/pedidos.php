@@ -152,7 +152,6 @@ include('../testasessao.php');
                     <button type="submit" id="btnPesquisar" class="btn btn-default">
                       <i class="fas fa-search"></i>
                     </button>
-                    <a class="btn btn-success" href="form-adicionar.php"><i class="fa-solid fa-plus"></i></a>
                   </div>
                 </div>
               </div>
@@ -188,9 +187,8 @@ include('../testasessao.php');
                                 <td>'.$linha['pedido_hora'].'</td>
                                 <td>R$ '.$linha['pedido_valor'].'</td>
                                 <td>
-                                    <a class="btn btn-warning" href="form-alterar.php?pedido='.$linha['pedido_id'].'"><i class="fa-solid fa-pencil"></i></a>
+                                    <a class="btn btn-danger" href="excluir.php?pedido='.$linha['pedido_id'].'"><i class="fa-solid fa-trash"></i></a>
                                 </td>
-
                             </tr>
                         ';
                         }
